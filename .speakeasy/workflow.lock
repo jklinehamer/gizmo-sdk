@@ -6,7 +6,7 @@ sources:
         sourceBlobDigest: sha256:07da7cdd4e14ac9cdcec76a4579ce929dd065711895612767f0ed7095df4aa45
         tags:
             - latest
-            - speakeasy-sdk-regen-1760990754
+            - speakeasy-sdk-regen-1760992925
             - 1.0.0
 targets:
     gizmo:
@@ -15,7 +15,7 @@ targets:
         sourceRevisionDigest: sha256:d46f0af2bedbb35efbd911a8a87bc628b71918a5f7f7cf313ca5a88a724e141e
         sourceBlobDigest: sha256:07da7cdd4e14ac9cdcec76a4579ce929dd065711895612767f0ed7095df4aa45
         codeSamplesNamespace: gizmo-rest-api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:c5073ffd9e284fedc6c6609a452ade06794b5b0855e84ced41d46b0488ca56c0
+        codeSamplesRevisionDigest: sha256:0392f23156680c6e44c6ccbf27a34ce404edb11ff74b7dcf4cc9220ba6007d03
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -28,10 +28,18 @@ workflow:
             output: .speakeasy/out.openapi.yaml
             registry:
                 location: registry.speakeasyapi.dev/gizmo-2xw/prod/gizmo-rest-api
+        mintlify:
+            inputs:
+                - location: openapi.yaml
+            overlays:
+                - location: code-samples-overlay.yaml
     targets:
         gizmo:
             target: typescript
             source: Gizmo REST API
+            publish:
+                npm:
+                    token: $npm_token
             codeSamples:
                 registry:
                     location: registry.speakeasyapi.dev/gizmo-2xw/prod/gizmo-rest-api-typescript-code-samples
