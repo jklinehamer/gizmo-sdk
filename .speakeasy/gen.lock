@@ -5,8 +5,10 @@ management:
   docVersion: 1.0.0
   speakeasyVersion: 1.637.2
   generationVersion: 2.727.9
-  releaseVersion: 0.1.1
-  configChecksum: 8688359d091a72db934eb004b5441e32
+  releaseVersion: 0.1.2
+  configChecksum: ec36ca438dd0eeebebdc24e8fe5c298b
+  repoURL: https://github.com/jklinehamer/gizmo-sdk.git
+  installationURL: https://github.com/jklinehamer/gizmo-sdk
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -136,3 +138,11 @@ examples:
         "200":
           application/json: {"id": "<id>"}
 examplesVersion: 1.0.2
+releaseNotes: |
+  ## Typescript SDK Changes Detected:
+  * `gizmo.applications.get()`: **Added**
+  * `gizmo.applications.update()`: **Added**
+  * `gizmo.applications.create()`: **Added**
+  * `gizmo.applications.getApplication()`: **Deleted** **Breaking** :warning:
+  * `gizmo.applications.updateApplication()`: **Deleted** **Breaking** :warning:
+  * `gizmo.applications.createApplication()`: **Deleted** **Breaking** :warning:
