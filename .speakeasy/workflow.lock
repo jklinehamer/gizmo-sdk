@@ -1,0 +1,39 @@
+speakeasyVersion: 1.637.2
+sources:
+    Gizmo REST API:
+        sourceNamespace: gizmo-rest-api
+        sourceRevisionDigest: sha256:80c9a7689db79cd4707f4c5713e72fcacd718981e3bb8891e851e9e80ad9f030
+        sourceBlobDigest: sha256:b24540045fa66594e631aa2656e391fc69dcee19e0622bc1b558fbdaf66f32a3
+        tags:
+            - latest
+            - 1.0.0
+targets:
+    gizmo:
+        source: Gizmo REST API
+        sourceNamespace: gizmo-rest-api
+        sourceRevisionDigest: sha256:80c9a7689db79cd4707f4c5713e72fcacd718981e3bb8891e851e9e80ad9f030
+        sourceBlobDigest: sha256:b24540045fa66594e631aa2656e391fc69dcee19e0622bc1b558fbdaf66f32a3
+        codeSamplesNamespace: gizmo-rest-api-typescript-code-samples
+        codeSamplesRevisionDigest: sha256:130e63fd870c81527402e087b37e06623f859ea6a9c200ea49b510c0c5cd917a
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        Gizmo REST API:
+            inputs:
+                - location: openapi.yaml
+            overlays:
+                - location: .speakeasy/speakeasy-modifications-overlay.yaml
+            output: .speakeasy/out.openapi.yaml
+            registry:
+                location: registry.speakeasyapi.dev/gizmo-2xw/prod/gizmo-rest-api
+    targets:
+        gizmo:
+            target: typescript
+            source: Gizmo REST API
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/gizmo-2xw/prod/gizmo-rest-api-typescript-code-samples
+                labelOverride:
+                    fixedValue: Typescript (SDK)
+                blocking: false

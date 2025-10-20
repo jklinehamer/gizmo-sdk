@@ -1,0 +1,306 @@
+openapi: 3.1.0
+externalDocs:
+  description: Find out more about Gizmo REST API
+  url: www.usegizmo.com
+info:
+  version: 1.0.0
+  title: Gizmo REST API
+servers:
+  - url: https://core.usegizmo.com/v1
+    description: Production server
+components:
+  schemas:
+    ApplicationSelect:
+      type: object
+      properties:
+        id:
+          type: string
+        createdAt:
+          type: number
+        updatedAt:
+          type: number
+        losId:
+          type: string
+        crmId:
+          type: string
+        losApplicationId:
+          type: string
+        assignedUserId:
+          type: string
+        subjectPropertyId:
+          type: string
+        status:
+          type: string
+          enum:
+            - NEW
+            - ATTEMPTED
+            - CONTACTED
+            - CREDIT_PULLED
+            - PRE_APPROVED
+            - APPLICATION
+            - PROCESSING
+            - SUBMITTAL
+            - RESUBMITTAL
+            - CONDITIONALLY_APPROVED
+            - FINAL_APPROVED
+            - DOCS_OUT
+            - FUNDED
+            - PURCHASED
+            - COMPLETED
+            - WITHDRAWN
+            - DENIED
+        nextAppointmentAt:
+          type: number
+        timezone:
+          type: string
+          description: 'Example: "America/New_York'
+        timezoneOffset:
+          type: number
+        primaryBorrowerId:
+          type: string
+      required:
+        - id
+        - createdAt
+        - status
+        - timezone
+        - primaryBorrowerId
+    idParams:
+      type: string
+      minLength: 3
+      example: '423'
+    ApplicationInsert:
+      type: object
+      properties:
+        crmId:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        streetAddress:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+          enum:
+            - al
+            - ak
+            - az
+            - ar
+            - ca
+            - co
+            - ct
+            - de
+            - dc
+            - fl
+            - ga
+            - hi
+            - id
+            - il
+            - in
+            - ia
+            - ks
+            - ky
+            - la
+            - me
+            - md
+            - ma
+            - mi
+            - mn
+            - ms
+            - mo
+            - mt
+            - ne
+            - nv
+            - nh
+            - nj
+            - nm
+            - ny
+            - nc
+            - nd
+            - oh
+            - ok
+            - or
+            - pa
+            - ri
+            - sc
+            - sd
+            - tn
+            - tx
+            - ut
+            - vt
+            - va
+            - wa
+            - wv
+            - wi
+            - wy
+        zip:
+          type: string
+        leadProviderSlug:
+          type: string
+        orgId:
+          type: string
+      required:
+        - firstName
+        - lastName
+        - phone
+        - state
+        - leadProviderSlug
+        - orgId
+    ApplicationPatch:
+      type: object
+      properties:
+        id:
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/idParams'
+          required:
+            - id
+        status:
+          type: string
+          enum:
+            - NEW
+            - ATTEMPTED
+            - CONTACTED
+            - CREDIT_PULLED
+            - PRE_APPROVED
+            - APPLICATION
+            - PROCESSING
+            - SUBMITTAL
+            - RESUBMITTAL
+            - CONDITIONALLY_APPROVED
+            - FINAL_APPROVED
+            - DOCS_OUT
+            - FUNDED
+            - PURCHASED
+            - COMPLETED
+            - WITHDRAWN
+            - DENIED
+      required:
+        - id
+        - status
+  parameters: {}
+paths:
+  /applications/{id}:
+    get:
+      operationId: getApplication
+      summary: Get Application
+      tags:
+        - Applications
+      parameters:
+        - schema:
+            $ref: '#/components/schemas/idParams'
+          required: true
+          name: id
+          in: path
+      responses:
+        '200':
+          description: The selected application
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationSelect'
+        '404':
+          description: Application not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                  - message
+        '422':
+          description: Invalid id error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  error:
+                    type: object
+                    properties:
+                      issues:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            code:
+                              type: string
+                            path:
+                              type: array
+                              items:
+                                anyOf:
+                                  - type: string
+                                  - type: number
+                            message:
+                              type: string
+                          required:
+                            - code
+                            - path
+                      name:
+                        type: string
+                    required:
+                      - issues
+                      - name
+                required:
+                  - success
+                  - error
+      x-speakeasy-name-override: get
+    patch:
+      operationId: updateApplication
+      summary: Update Application
+      tags:
+        - Applications
+      parameters:
+        - schema:
+            $ref: '#/components/schemas/idParams'
+          required: true
+          name: id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationPatch'
+        required: true
+      responses:
+        '204':
+          description: The application was updated successfully
+      x-speakeasy-name-override: update
+  /applications:
+    post:
+      operationId: createApplication
+      summary: Create Application
+      tags:
+        - Applications
+      requestBody:
+        description: The Application to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationInsert'
+      responses:
+        '200':
+          description: The created user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                required:
+                  - id
+      x-speakeasy-name-override: create
+webhooks: {}

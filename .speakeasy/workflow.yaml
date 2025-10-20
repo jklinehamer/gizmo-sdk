@@ -1,0 +1,21 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    Gizmo REST API:
+        inputs:
+            - location: openapi.yaml
+        overlays:
+            - location: .speakeasy/speakeasy-modifications-overlay.yaml
+        output: .speakeasy/out.openapi.yaml
+        registry:
+            location: registry.speakeasyapi.dev/gizmo-2xw/prod/gizmo-rest-api
+targets:
+    gizmo:
+        target: typescript
+        source: Gizmo REST API
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/gizmo-2xw/prod/gizmo-rest-api-typescript-code-samples
+            labelOverride:
+                fixedValue: Typescript (SDK)
+            blocking: false

@@ -1,0 +1,138 @@
+lockVersion: 2.0.0
+id: d5b937e1-f06a-47e1-88df-7de294f90dcf
+management:
+  docChecksum: 40dc8f4a268178971ff751da9dda2045
+  docVersion: 1.0.0
+  speakeasyVersion: 1.637.2
+  generationVersion: 2.727.9
+  releaseVersion: 0.1.1
+  configChecksum: 8688359d091a72db934eb004b5441e32
+features:
+  typescript:
+    additionalDependencies: 0.1.0
+    core: 3.22.0
+    defaultEnabledRetries: 0.1.0
+    devContainers: 2.90.1
+    enumUnions: 0.1.0
+    envVarSecurityUsage: 0.1.2
+    globalSecurityCallbacks: 0.1.0
+    globalServerURLs: 2.82.5
+    methodArguments: 0.1.2
+    nameOverrides: 2.81.2
+    responseFormat: 0.2.3
+    retries: 2.83.0
+    sdkHooks: 0.3.0
+    unions: 2.86.0
+generatedFiles:
+  - .devcontainer/README.md
+  - .devcontainer/devcontainer.json
+  - .devcontainer/setup.sh
+  - .gitattributes
+  - .npmignore
+  - FUNCTIONS.md
+  - RUNTIMES.md
+  - USAGE.md
+  - docs/lib/utils/retryconfig.md
+  - docs/models/applicationinsert.md
+  - docs/models/applicationpatch.md
+  - docs/models/applicationpatchstatus.md
+  - docs/models/applicationselect.md
+  - docs/models/applicationselectstatus.md
+  - docs/models/errors/notfounderror.md
+  - docs/models/errors/unprocessableentityerror.md
+  - docs/models/id.md
+  - docs/models/operations/createapplicationresponse.md
+  - docs/models/operations/errort.md
+  - docs/models/operations/getapplicationrequest.md
+  - docs/models/operations/issue.md
+  - docs/models/operations/path.md
+  - docs/models/operations/updateapplicationrequest.md
+  - docs/models/state.md
+  - docs/sdks/applications/README.md
+  - eslint.config.mjs
+  - examples/.env.template
+  - examples/README.md
+  - examples/applicationsGet.example.ts
+  - examples/package.json
+  - jsr.json
+  - package.json
+  - src/core.ts
+  - src/funcs/applicationsCreate.ts
+  - src/funcs/applicationsGet.ts
+  - src/funcs/applicationsUpdate.ts
+  - src/hooks/hooks.ts
+  - src/hooks/index.ts
+  - src/hooks/types.ts
+  - src/index.ts
+  - src/lib/base64.ts
+  - src/lib/config.ts
+  - src/lib/dlv.ts
+  - src/lib/encodings.ts
+  - src/lib/env.ts
+  - src/lib/files.ts
+  - src/lib/http.ts
+  - src/lib/is-plain-object.ts
+  - src/lib/logger.ts
+  - src/lib/matchers.ts
+  - src/lib/primitives.ts
+  - src/lib/retries.ts
+  - src/lib/schemas.ts
+  - src/lib/sdks.ts
+  - src/lib/security.ts
+  - src/lib/url.ts
+  - src/models/applicationinsert.ts
+  - src/models/applicationpatch.ts
+  - src/models/applicationselect.ts
+  - src/models/errors/getapplication.ts
+  - src/models/errors/gizmodefaulterror.ts
+  - src/models/errors/gizmoerror.ts
+  - src/models/errors/httpclienterrors.ts
+  - src/models/errors/index.ts
+  - src/models/errors/responsevalidationerror.ts
+  - src/models/errors/sdkvalidationerror.ts
+  - src/models/index.ts
+  - src/models/operations/createapplication.ts
+  - src/models/operations/getapplication.ts
+  - src/models/operations/index.ts
+  - src/models/operations/updateapplication.ts
+  - src/sdk/applications.ts
+  - src/sdk/index.ts
+  - src/sdk/sdk.ts
+  - src/types/async.ts
+  - src/types/blobs.ts
+  - src/types/constdatetime.ts
+  - src/types/enums.ts
+  - src/types/fp.ts
+  - src/types/index.ts
+  - src/types/operations.ts
+  - src/types/rfcdate.ts
+  - src/types/streams.ts
+  - tsconfig.json
+examples:
+  getApplication:
+    speakeasy-default-get-application:
+      parameters:
+        path:
+          id: "423"
+      responses:
+        "200":
+          application/json: {"id": "<id>", "createdAt": 2332.48, "status": "PRE_APPROVED", "timezone": "America/Creston", "primaryBorrowerId": "<id>"}
+        "404":
+          application/json: {"message": "<value>"}
+        "422":
+          application/json: {"success": true, "error": {"issues": [], "name": "<value>"}}
+  updateApplication:
+    speakeasy-default-update-application:
+      parameters:
+        path:
+          id: "423"
+      requestBody:
+        application/json: {"id": {"id": "423"}, "status": "FUNDED"}
+  createApplication:
+    speakeasy-default-create-application:
+      requestBody:
+        application/json: {"firstName": "Juliet", "lastName": "Schuppe", "phone": "322.625.7472", "state": "ky", "leadProviderSlug": "<value>", "orgId": "<id>"}
+      responses:
+        "200":
+          application/json: {"id": "<id>"}
+examplesVersion: 1.0.2
