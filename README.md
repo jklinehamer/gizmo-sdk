@@ -1,6 +1,6 @@
 # @gizmo-os/sdk
 
-Developer-friendly & type-safe Typescript SDK specifically catered to leverage *@gizmo-os/sdk* API.
+Developer-friendly & type-safe Typescript SDK specifically catered to leverage *@gizmo-os/sdk* API v1.
 
 <div align="left" style="margin-bottom: 0;">
     <a href="https://www.speakeasy.com/?utm_source=@gizmo-os/sdk&utm_campaign=typescript" class="badge-link">
