@@ -27,3 +27,4 @@ targets:
             labelOverride:
                 fixedValue: Typescript (SDK)
             blocking: false
+            output: codeSamples.yaml
