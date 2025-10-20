@@ -13,6 +13,9 @@ targets:
     gizmo:
         target: typescript
         source: Gizmo REST API
+        publish:
+            npm:
+                token: $npm_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/gizmo-2xw/prod/gizmo-rest-api-typescript-code-samples
