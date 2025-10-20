@@ -1,0 +1,74 @@
+overlay: 1.0.0
+info:
+  title: CodeSamples overlay for openapi.yaml
+  version: 1.0.0
+extends: file:///Users/jacobklinehamer/git/gizmo-sdk/openapi.yaml
+actions:
+  - target: $["paths"]["/applications"]["post"]
+    update:
+      x-codeSamples:
+        - lang: typescript
+          label: createApplication
+          source: |-
+            import { Gizmo } from "@gizmo-os/sdk";
+
+            const gizmo = new Gizmo();
+
+            async function run() {
+              const result = await gizmo.applications.createApplication({
+                firstName: "Juliet",
+                lastName: "Schuppe",
+                phone: "322.625.7472",
+                state: "ky",
+                leadProviderSlug: "<value>",
+                orgId: "<id>",
+              });
+
+              console.log(result);
+            }
+
+            run();
+  - target: $["paths"]["/applications/{id}"]["get"]
+    update:
+      x-codeSamples:
+        - lang: typescript
+          label: getApplication
+          source: |-
+            import { Gizmo } from "@gizmo-os/sdk";
+
+            const gizmo = new Gizmo();
+
+            async function run() {
+              const result = await gizmo.applications.getApplication({
+                id: "423",
+              });
+
+              console.log(result);
+            }
+
+            run();
+  - target: $["paths"]["/applications/{id}"]["patch"]
+    update:
+      x-codeSamples:
+        - lang: typescript
+          label: updateApplication
+          source: |-
+            import { Gizmo } from "@gizmo-os/sdk";
+
+            const gizmo = new Gizmo();
+
+            async function run() {
+              await gizmo.applications.updateApplication({
+                id: "423",
+                applicationPatch: {
+                  id: {
+                    id: "423",
+                  },
+                  status: "FUNDED",
+                },
+              });
+
+
+            }
+
+            run();

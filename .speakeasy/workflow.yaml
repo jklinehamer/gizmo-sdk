@@ -9,6 +9,11 @@ sources:
         output: .speakeasy/out.openapi.yaml
         registry:
             location: registry.speakeasyapi.dev/gizmo-2xw/prod/gizmo-rest-api
+    mintlify:
+        inputs:
+            - location: openapi.yaml
+        overlays:
+            - location: code-samples-overlay.yaml
 targets:
     gizmo:
         target: typescript
