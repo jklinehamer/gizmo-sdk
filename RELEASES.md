@@ -37,3 +37,13 @@ Based on:
 - [typescript v0.2.7] .
 ### Releases
 - [NPM v0.2.7] https://www.npmjs.com/package/@gizmo-os/sdk/v/0.2.7 - .
+
+## 2025-10-21 02:12:14
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.637.3 (2.727.9) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v0.3.1] .
+### Releases
+- [NPM v0.3.1] https://www.npmjs.com/package/@gizmo-os/sdk/v/0.3.1 - .
