@@ -8,17 +8,17 @@ dotenv.config();
  * Example usage of the @gizmo-os/sdk SDK
  *
  * To run this example from the examples directory:
- * npm run build && npx tsx applicationsGet.example.ts
+ * npm run build && npx tsx applicationGetApplication.example.ts
  */
 
 import { Gizmo } from "@gizmo-os/sdk";
 
-const gizmo = new Gizmo();
+const gizmo = new Gizmo({
+  bearerAuth: process.env["GIZMO_BEARER_AUTH"] ?? "",
+});
 
 async function main() {
-  const result = await gizmo.applications.get({
-    id: "423",
-  });
+  const result = await gizmo.application.getApplication("423");
 
   console.log(result);
 }

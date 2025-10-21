@@ -7,10 +7,14 @@ import { dlv } from "./dlv.js";
 import * as z from "zod";
 
 export interface Env {
+  GIZMO_BEARER_AUTH?: string | undefined;
+
   GIZMO_DEBUG?: boolean | undefined;
 }
 
 export const envSchema: z.ZodType<Env, z.ZodTypeDef, unknown> = z.object({
+  GIZMO_BEARER_AUTH: z.string().optional(),
+
   GIZMO_DEBUG: z.coerce.boolean().optional(),
 });
 

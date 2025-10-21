@@ -8,6 +8,7 @@ import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
 import { GizmoError } from "../models/errors/gizmoerror.js";
 import {
@@ -28,15 +29,14 @@ import { Result } from "../types/fp.js";
 /**
  * Get Application
  */
-export function applicationsGet(
+export function applicationGetApplication(
   client: GizmoCore,
-  request: operations.GetApplicationRequest,
+  id: string,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    models.ApplicationSelect,
-    | errors.NotFoundError
-    | errors.UnprocessableEntityError
+    models.Application,
+    | errors.ErrorResponse
     | GizmoError
     | ResponseValidationError
     | ConnectionError
@@ -49,21 +49,20 @@ export function applicationsGet(
 > {
   return new APIPromise($do(
     client,
-    request,
+    id,
     options,
   ));
 }
 
 async function $do(
   client: GizmoCore,
-  request: operations.GetApplicationRequest,
+  id: string,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      models.ApplicationSelect,
-      | errors.NotFoundError
-      | errors.UnprocessableEntityError
+      models.Application,
+      | errors.ErrorResponse
       | GizmoError
       | ResponseValidationError
       | ConnectionError
@@ -76,8 +75,12 @@ async function $do(
     APICall,
   ]
 > {
+  const input: operations.GetApplicationRequest = {
+    id: id,
+  };
+
   const parsed = safeParse(
-    request,
+    input,
     (value) => operations.GetApplicationRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
@@ -100,15 +103,19 @@ async function $do(
     Accept: "application/json",
   }));
 
+  const secConfig = await extractSecurity(client._options.bearerAuth);
+  const securityInput = secConfig == null ? {} : { bearerAuth: secConfig };
+  const requestSecurity = resolveGlobalSecurity(securityInput);
+
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "getApplication",
     oAuth2Scopes: null,
 
-    resolvedSecurity: null,
+    resolvedSecurity: requestSecurity,
 
-    securitySource: null,
+    securitySource: client._options.bearerAuth,
     retryConfig: options?.retries
       || client._options.retryConfig
       || { strategy: "none" },
@@ -116,6 +123,7 @@ async function $do(
   };
 
   const requestRes = client._createRequest(context, {
+    security: requestSecurity,
     method: "GET",
     baseURL: options?.serverURL,
     path: path,
@@ -131,7 +139,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "422", "4XX", "5XX"],
+    errorCodes: ["400", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -145,9 +153,8 @@ async function $do(
   };
 
   const [result] = await M.match<
-    models.ApplicationSelect,
-    | errors.NotFoundError
-    | errors.UnprocessableEntityError
+    models.Application,
+    | errors.ErrorResponse
     | GizmoError
     | ResponseValidationError
     | ConnectionError
@@ -157,9 +164,8 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, models.ApplicationSelect$inboundSchema),
-    M.jsonErr(404, errors.NotFoundError$inboundSchema),
-    M.jsonErr(422, errors.UnprocessableEntityError$inboundSchema),
+    M.json(200, models.Application$inboundSchema),
+    M.jsonErr(400, errors.ErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

@@ -6,13 +6,127 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import * as models from "../index.js";
+
+export type CreateApplicationRequest = {
+  primaryBorrowerFirstName: string;
+  primaryBorrowerLastName: string;
+  primaryBorrowerEmail: string;
+  primaryBorrowerPhone: string;
+  primaryBorrowerDateOfBirth?: string | undefined;
+  primaryBorrowerSsn?: string | undefined;
+  /**
+   * The two-letter state abbreviation in lowercase
+   */
+  subjectPropertyState: models.State;
+  subjectPropertyStreetAddress?: string | undefined;
+  subjectPropertyCity?: string | undefined;
+  subjectPropertyZip?: string | undefined;
+  loanPurpose?: models.LoanPurpose | undefined;
+  losId?: string | undefined;
+  crmId?: string | undefined;
+  leadProviderSlug: string;
+};
 
 /**
- * The created user
+ * The created Application ID
  */
 export type CreateApplicationResponse = {
   id: string;
 };
+
+/** @internal */
+export const CreateApplicationRequest$inboundSchema: z.ZodType<
+  CreateApplicationRequest,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  primaryBorrowerFirstName: z.string(),
+  primaryBorrowerLastName: z.string(),
+  primaryBorrowerEmail: z.string(),
+  primaryBorrowerPhone: z.string(),
+  primaryBorrowerDateOfBirth: z.string().optional(),
+  primaryBorrowerSsn: z.string().optional(),
+  subjectPropertyState: models.State$inboundSchema,
+  subjectPropertyStreetAddress: z.string().optional(),
+  subjectPropertyCity: z.string().optional(),
+  subjectPropertyZip: z.string().optional(),
+  loanPurpose: models.LoanPurpose$inboundSchema.optional(),
+  losId: z.string().optional(),
+  crmId: z.string().optional(),
+  leadProviderSlug: z.string(),
+});
+
+/** @internal */
+export type CreateApplicationRequest$Outbound = {
+  primaryBorrowerFirstName: string;
+  primaryBorrowerLastName: string;
+  primaryBorrowerEmail: string;
+  primaryBorrowerPhone: string;
+  primaryBorrowerDateOfBirth?: string | undefined;
+  primaryBorrowerSsn?: string | undefined;
+  subjectPropertyState: string;
+  subjectPropertyStreetAddress?: string | undefined;
+  subjectPropertyCity?: string | undefined;
+  subjectPropertyZip?: string | undefined;
+  loanPurpose?: string | undefined;
+  losId?: string | undefined;
+  crmId?: string | undefined;
+  leadProviderSlug: string;
+};
+
+/** @internal */
+export const CreateApplicationRequest$outboundSchema: z.ZodType<
+  CreateApplicationRequest$Outbound,
+  z.ZodTypeDef,
+  CreateApplicationRequest
+> = z.object({
+  primaryBorrowerFirstName: z.string(),
+  primaryBorrowerLastName: z.string(),
+  primaryBorrowerEmail: z.string(),
+  primaryBorrowerPhone: z.string(),
+  primaryBorrowerDateOfBirth: z.string().optional(),
+  primaryBorrowerSsn: z.string().optional(),
+  subjectPropertyState: models.State$outboundSchema,
+  subjectPropertyStreetAddress: z.string().optional(),
+  subjectPropertyCity: z.string().optional(),
+  subjectPropertyZip: z.string().optional(),
+  loanPurpose: models.LoanPurpose$outboundSchema.optional(),
+  losId: z.string().optional(),
+  crmId: z.string().optional(),
+  leadProviderSlug: z.string(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateApplicationRequest$ {
+  /** @deprecated use `CreateApplicationRequest$inboundSchema` instead. */
+  export const inboundSchema = CreateApplicationRequest$inboundSchema;
+  /** @deprecated use `CreateApplicationRequest$outboundSchema` instead. */
+  export const outboundSchema = CreateApplicationRequest$outboundSchema;
+  /** @deprecated use `CreateApplicationRequest$Outbound` instead. */
+  export type Outbound = CreateApplicationRequest$Outbound;
+}
+
+export function createApplicationRequestToJSON(
+  createApplicationRequest: CreateApplicationRequest,
+): string {
+  return JSON.stringify(
+    CreateApplicationRequest$outboundSchema.parse(createApplicationRequest),
+  );
+}
+
+export function createApplicationRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateApplicationRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateApplicationRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateApplicationRequest' from JSON`,
+  );
+}
 
 /** @internal */
 export const CreateApplicationResponse$inboundSchema: z.ZodType<

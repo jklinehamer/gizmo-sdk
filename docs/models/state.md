@@ -1,5 +1,7 @@
 # State
 
+The two-letter state abbreviation in lowercase
+
 ## Example Usage
 
 ```typescript

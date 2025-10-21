@@ -20,21 +20,21 @@ specific category of applications.
 
 ```typescript
 import { GizmoCore } from "@gizmo-os/sdk/core.js";
-import { applicationsGet } from "@gizmo-os/sdk/funcs/applicationsGet.js";
+import { applicationGetApplication } from "@gizmo-os/sdk/funcs/applicationGetApplication.js";
 
 // Use `GizmoCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const gizmo = new GizmoCore();
+const gizmo = new GizmoCore({
+  bearerAuth: process.env["GIZMO_BEARER_AUTH"] ?? "",
+});
 
 async function run() {
-  const res = await applicationsGet(gizmo, {
-    id: "423",
-  });
+  const res = await applicationGetApplication(gizmo, "423");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("applicationsGet failed:", res.error);
+    console.log("applicationGetApplication failed:", res.error);
   }
 }
 

@@ -1,11 +1,11 @@
-# ApplicationSelectStatus
+# Milestone
 
 ## Example Usage
 
 ```typescript
-import { ApplicationSelectStatus } from "@gizmo-os/sdk/models";
+import { Milestone } from "@gizmo-os/sdk/models";
 
-let value: ApplicationSelectStatus = "APPLICATION";
+let value: Milestone = "FUNDED";
 ```
 
 ## Values

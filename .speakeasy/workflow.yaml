@@ -1,30 +1,15 @@
 workflowVersion: 1.0.0
 speakeasyVersion: latest
 sources:
-    Gizmo REST API:
+    main:
         inputs:
-            - location: openapi.yaml
-        overlays:
-            - location: .speakeasy/speakeasy-modifications-overlay.yaml
-        output: .speakeasy/out.openapi.yaml
+            - location: https://polished-gerbil-615.convex.site/doc
         registry:
-            location: registry.speakeasyapi.dev/gizmo-2xw/prod/gizmo-rest-api
-    mintlify:
-        inputs:
-            - location: openapi.yaml
-        overlays:
-            - location: code-samples-overlay.yaml
+            location: registry.speakeasyapi.dev/gizmo-2xw/prod/main
 targets:
     gizmo:
         target: typescript
-        source: Gizmo REST API
-        publish:
-            npm:
-                token: $npm_token
+        source: main
         codeSamples:
             registry:
-                location: registry.speakeasyapi.dev/gizmo-2xw/prod/gizmo-rest-api-typescript-code-samples
-            labelOverride:
-                fixedValue: Typescript (SDK)
-            blocking: false
-            output: codeSamples.yaml
+                location: registry.speakeasyapi.dev/gizmo-2xw/prod/main

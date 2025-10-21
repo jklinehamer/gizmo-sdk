@@ -6,19 +6,13 @@
 import { UpdateApplicationRequest } from "@gizmo-os/sdk/models/operations";
 
 let value: UpdateApplicationRequest = {
-  id: "423",
-  applicationPatch: {
-    id: {
-      id: "423",
-    },
-    status: "CONDITIONALLY_APPROVED",
-  },
+  id: "<id>",
 };
 ```
 
 ## Fields
 
-| Field                                                       | Type                                                        | Required                                                    | Description                                                 | Example                                                     |
-| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| `id`                                                        | *string*                                                    | :heavy_check_mark:                                          | N/A                                                         | 423                                                         |
-| `applicationPatch`                                          | [models.ApplicationPatch](../../models/applicationpatch.md) | :heavy_check_mark:                                          | N/A                                                         |                                                             |
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `id`                                                                                               | *string*                                                                                           | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `requestBody`                                                                                      | [operations.UpdateApplicationRequestBody](../../models/operations/updateapplicationrequestbody.md) | :heavy_minus_sign:                                                                                 | N/A                                                                                                |

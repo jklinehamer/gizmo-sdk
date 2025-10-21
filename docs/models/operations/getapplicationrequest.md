@@ -6,12 +6,12 @@
 import { GetApplicationRequest } from "@gizmo-os/sdk/models/operations";
 
 let value: GetApplicationRequest = {
-  id: "423",
+  id: "<id>",
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        | Example            |
-| ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| `id`               | *string*           | :heavy_check_mark: | N/A                | 423                |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `id`               | *string*           | :heavy_check_mark: | N/A                |

@@ -1,6 +1,6 @@
 # CreateApplicationResponse
 
-The created user
+The created Application ID
 
 ## Example Usage
 
