@@ -6,6 +6,7 @@ sources:
         sourceBlobDigest: sha256:82e5a15a56b740c7b4105f65916357e5c0d7f33d01430b0d5c5561b4b342832e
         tags:
             - latest
+            - speakeasy-sdk-regen-1761009138
             - 1.0.0
 targets:
     gizmo:

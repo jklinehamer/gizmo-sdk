@@ -5,8 +5,10 @@ management:
   docVersion: 1.0.0
   speakeasyVersion: 1.637.3
   generationVersion: 2.727.9
-  releaseVersion: 0.2.5
-  configChecksum: 420babc5f3c1afdb12f2345d280e6452
+  releaseVersion: 0.2.6
+  configChecksum: 32e20d52e1990c191ffda80d949c2fbc
+  repoURL: https://github.com/jklinehamer/gizmo-sdk.git
+  installationURL: https://github.com/jklinehamer/gizmo-sdk
   published: true
 features:
   typescript:
