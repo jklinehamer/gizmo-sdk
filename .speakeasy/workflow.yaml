@@ -4,6 +4,8 @@ sources:
     main:
         inputs:
             - location: https://core.usegizmo.com/doc
+        overlays:
+            - location: .speakeasy/speakeasy-modifications-overlay-1.yaml
         output: ./openapi.yaml
         registry:
             location: registry.speakeasyapi.dev/gizmo-2xw/prod/main

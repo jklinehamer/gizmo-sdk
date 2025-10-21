@@ -29,10 +29,10 @@ import { Result } from "../types/fp.js";
 /**
  * Update Application
  */
-export function applicationUpdateApplication(
+export function applicationsUpdate(
   client: GizmoCore,
   id: string,
-  requestBody?: operations.UpdateApplicationRequestBody | undefined,
+  requestBody: operations.UpdateApplicationRequestBody,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -59,7 +59,7 @@ export function applicationUpdateApplication(
 async function $do(
   client: GizmoCore,
   id: string,
-  requestBody?: operations.UpdateApplicationRequestBody | undefined,
+  requestBody: operations.UpdateApplicationRequestBody,
   options?: RequestOptions,
 ): Promise<
   [

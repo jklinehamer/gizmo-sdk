@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { GizmoCore } from "@gizmo-os/sdk/core.js";
-import { applicationGetApplication } from "@gizmo-os/sdk/funcs/applicationGetApplication.js";
+import { applicationsGet } from "@gizmo-os/sdk/funcs/applicationsGet.js";
 
 // Use `GizmoCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -29,12 +29,12 @@ const gizmo = new GizmoCore({
 });
 
 async function run() {
-  const res = await applicationGetApplication(gizmo, "<id>");
+  const res = await applicationsGet(gizmo, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("applicationGetApplication failed:", res.error);
+    console.log("applicationsGet failed:", res.error);
   }
 }
 

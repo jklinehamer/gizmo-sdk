@@ -6,7 +6,6 @@ sources:
         sourceBlobDigest: sha256:82e5a15a56b740c7b4105f65916357e5c0d7f33d01430b0d5c5561b4b342832e
         tags:
             - latest
-            - speakeasy-sdk-regen-1761011121
             - 1.0.0
 targets:
     gizmo:
@@ -15,7 +14,7 @@ targets:
         sourceRevisionDigest: sha256:8b97a1d60218c2ac430425608e06a91c1ae2f4434b58b626754dd26fe8a359ef
         sourceBlobDigest: sha256:82e5a15a56b740c7b4105f65916357e5c0d7f33d01430b0d5c5561b4b342832e
         codeSamplesNamespace: main-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:08bae5085b89aa420572d9cecf6de34b7527834d66cec073999a5a6ade60b2a8
+        codeSamplesRevisionDigest: sha256:13b28319a214a58b8e86f88dd2ed3f25f98106d5d541561ba85a70c549b31904
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -23,6 +22,8 @@ workflow:
         main:
             inputs:
                 - location: https://core.usegizmo.com/doc
+            overlays:
+                - location: .speakeasy/speakeasy-modifications-overlay-1.yaml
             output: ./openapi.yaml
             registry:
                 location: registry.speakeasyapi.dev/gizmo-2xw/prod/main

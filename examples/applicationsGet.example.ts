@@ -8,7 +8,7 @@ dotenv.config();
  * Example usage of the @gizmo-os/sdk SDK
  *
  * To run this example from the examples directory:
- * npm run build && npx tsx applicationGetApplication.example.ts
+ * npm run build && npx tsx applicationsGet.example.ts
  */
 
 import { Gizmo } from "@gizmo-os/sdk";
@@ -18,7 +18,7 @@ const gizmo = new Gizmo({
 });
 
 async function main() {
-  const result = await gizmo.application.getApplication("<id>");
+  const result = await gizmo.applications.get("<id>");
 
   console.log(result);
 }

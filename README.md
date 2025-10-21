@@ -102,7 +102,7 @@ const gizmo = new Gizmo({
 });
 
 async function run() {
-  const result = await gizmo.application.getApplication("<id>");
+  const result = await gizmo.applications.get("<id>");
 
   console.log(result);
 }
@@ -132,7 +132,7 @@ const gizmo = new Gizmo({
 });
 
 async function run() {
-  const result = await gizmo.application.getApplication("<id>");
+  const result = await gizmo.applications.get("<id>");
 
   console.log(result);
 }
@@ -148,11 +148,11 @@ run();
 <details open>
 <summary>Available methods</summary>
 
-### [application](docs/sdks/application/README.md)
+### [applications](docs/sdks/applications/README.md)
 
-* [getApplication](docs/sdks/application/README.md#getapplication) - Get Application
-* [updateApplication](docs/sdks/application/README.md#updateapplication) - Update Application
-* [createApplication](docs/sdks/application/README.md#createapplication) - Create Application
+* [get](docs/sdks/applications/README.md#get) - Get Application
+* [update](docs/sdks/applications/README.md#update) - Update Application
+* [create](docs/sdks/applications/README.md#create) - Create Application
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -172,9 +172,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
-- [`applicationCreateApplication`](docs/sdks/application/README.md#createapplication) - Create Application
-- [`applicationGetApplication`](docs/sdks/application/README.md#getapplication) - Get Application
-- [`applicationUpdateApplication`](docs/sdks/application/README.md#updateapplication) - Update Application
+- [`applicationsCreate`](docs/sdks/applications/README.md#create) - Create Application
+- [`applicationsGet`](docs/sdks/applications/README.md#get) - Get Application
+- [`applicationsUpdate`](docs/sdks/applications/README.md#update) - Update Application
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
@@ -193,7 +193,7 @@ const gizmo = new Gizmo({
 });
 
 async function run() {
-  const result = await gizmo.application.getApplication("<id>", {
+  const result = await gizmo.applications.get("<id>", {
     retries: {
       strategy: "backoff",
       backoff: {
@@ -232,7 +232,7 @@ const gizmo = new Gizmo({
 });
 
 async function run() {
-  const result = await gizmo.application.getApplication("<id>");
+  const result = await gizmo.applications.get("<id>");
 
   console.log(result);
 }
@@ -267,7 +267,7 @@ const gizmo = new Gizmo({
 
 async function run() {
   try {
-    const result = await gizmo.application.getApplication("<id>");
+    const result = await gizmo.applications.get("<id>");
 
     console.log(result);
   } catch (error) {
@@ -328,7 +328,7 @@ const gizmo = new Gizmo({
 });
 
 async function run() {
-  const result = await gizmo.application.getApplication("<id>");
+  const result = await gizmo.applications.get("<id>");
 
   console.log(result);
 }

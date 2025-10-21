@@ -1,0 +1,58 @@
+overlay: 1.0.0
+x-speakeasy-jsonpath: rfc9535
+info:
+  title: Speakeasy Modifications
+  version: 0.0.5
+  x-speakeasy-metadata:
+    after: ""
+    before: ""
+    type: speakeasy-modifications
+actions:
+  - target: $["paths"]["/applications/{id}"]["patch"]["requestBody"]
+    update:
+      required: true
+    x-speakeasy-metadata:
+      created_at: 1761012417230
+      type: user-edit
+  - target: $["paths"]["/applications"]["post"]["requestBody"]
+    update:
+      required: true,
+    x-speakeasy-metadata:
+      created_at: 1761012433710
+      type: user-edit
+  - target: $["paths"]["/applications/{id}"]["patch"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      after: sdk.applications.update()
+      before: sdk.Application.updateApplication()
+      created_at: 1761012475137
+      reviewed_at: 1761012479019
+      type: method-name
+  - target: $["paths"]["/applications"]["post"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      after: sdk.applications.create()
+      before: sdk.Application.createApplication()
+      created_at: 1761012475137
+      reviewed_at: 1761012479019
+      type: method-name
+  - target: $["paths"]["/applications/{id}"]["get"]
+    update:
+      x-speakeasy-group: applications
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.applications.get()
+      before: sdk.Application.getApplication()
+      created_at: 1761012475137
+      reviewed_at: 1761012479019
+      type: method-name
+  - target: $["paths"]["/applications"]["post"]["requestBody"]
+    update:
+      required: true,
+    x-speakeasy-metadata:
+      created_at: 1761012487988
+      type: user-edit

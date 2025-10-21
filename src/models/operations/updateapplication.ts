@@ -31,7 +31,7 @@ export type UpdateApplicationRequestBody = {
 
 export type UpdateApplicationRequest = {
   id: string;
-  requestBody?: UpdateApplicationRequestBody | undefined;
+  requestBody: UpdateApplicationRequestBody;
 };
 
 /** @internal */
@@ -136,8 +136,7 @@ export const UpdateApplicationRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  RequestBody: z.lazy(() => UpdateApplicationRequestBody$inboundSchema)
-    .optional(),
+  RequestBody: z.lazy(() => UpdateApplicationRequestBody$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "RequestBody": "requestBody",
@@ -147,7 +146,7 @@ export const UpdateApplicationRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdateApplicationRequest$Outbound = {
   id: string;
-  RequestBody?: UpdateApplicationRequestBody$Outbound | undefined;
+  RequestBody: UpdateApplicationRequestBody$Outbound;
 };
 
 /** @internal */
@@ -157,8 +156,7 @@ export const UpdateApplicationRequest$outboundSchema: z.ZodType<
   UpdateApplicationRequest
 > = z.object({
   id: z.string(),
-  requestBody: z.lazy(() => UpdateApplicationRequestBody$outboundSchema)
-    .optional(),
+  requestBody: z.lazy(() => UpdateApplicationRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     requestBody: "RequestBody",

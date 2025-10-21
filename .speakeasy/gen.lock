@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 23e668fd-4c5a-4bde-b06e-eba340901bc5
 management:
-  docChecksum: c86f5937b235e72198e702727ddddbb3
+  docChecksum: 3e07d12984322d1a0f4da6d195fdee77
   docVersion: 1.0.0
   speakeasyVersion: 1.637.3
   generationVersion: 2.727.9
-  releaseVersion: 0.2.7
-  configChecksum: 89a220ffde46da60e7bf272119c45450
+  releaseVersion: 0.3.0
+  configChecksum: 3d71f9ad9d5b3b19c1e48d372234085c
   repoURL: https://github.com/jklinehamer/gizmo-sdk.git
   installationURL: https://github.com/jklinehamer/gizmo-sdk
   published: true
@@ -23,7 +23,9 @@ features:
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.5
+    groups: 2.81.3
     methodArguments: 0.1.2
+    nameOverrides: 2.81.2
     nullables: 0.1.1
     responseFormat: 0.2.3
     retries: 2.83.0
@@ -50,18 +52,18 @@ generatedFiles:
   - docs/models/operations/updateapplicationrequestbody.md
   - docs/models/security.md
   - docs/models/state.md
-  - docs/sdks/application/README.md
+  - docs/sdks/applications/README.md
   - eslint.config.mjs
   - examples/.env.template
   - examples/README.md
-  - examples/applicationGetApplication.example.ts
+  - examples/applicationsGet.example.ts
   - examples/package.json
   - jsr.json
   - package.json
   - src/core.ts
-  - src/funcs/applicationCreateApplication.ts
-  - src/funcs/applicationGetApplication.ts
-  - src/funcs/applicationUpdateApplication.ts
+  - src/funcs/applicationsCreate.ts
+  - src/funcs/applicationsGet.ts
+  - src/funcs/applicationsUpdate.ts
   - src/hooks/hooks.ts
   - src/hooks/index.ts
   - src/hooks/types.ts
@@ -100,7 +102,7 @@ generatedFiles:
   - src/models/operations/updateapplication.ts
   - src/models/security.ts
   - src/models/state.ts
-  - src/sdk/application.ts
+  - src/sdk/applications.ts
   - src/sdk/index.ts
   - src/sdk/sdk.ts
   - src/types/async.ts
@@ -129,6 +131,8 @@ examples:
       parameters:
         path:
           id: "<id>"
+      requestBody:
+        application/json: {}
       responses:
         "200":
           application/json: "<value>"

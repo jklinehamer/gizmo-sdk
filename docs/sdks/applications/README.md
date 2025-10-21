@@ -1,15 +1,15 @@
-# Application
-(*application*)
+# Applications
+(*applications*)
 
 ## Overview
 
 ### Available Operations
 
-* [getApplication](#getapplication) - Get Application
-* [updateApplication](#updateapplication) - Update Application
-* [createApplication](#createapplication) - Create Application
+* [get](#get) - Get Application
+* [update](#update) - Update Application
+* [create](#create) - Create Application
 
-## getApplication
+## get
 
 Get Application
 
@@ -24,7 +24,7 @@ const gizmo = new Gizmo({
 });
 
 async function run() {
-  const result = await gizmo.application.getApplication("<id>");
+  const result = await gizmo.applications.get("<id>");
 
   console.log(result);
 }
@@ -38,7 +38,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GizmoCore } from "@gizmo-os/sdk/core.js";
-import { applicationGetApplication } from "@gizmo-os/sdk/funcs/applicationGetApplication.js";
+import { applicationsGet } from "@gizmo-os/sdk/funcs/applicationsGet.js";
 
 // Use `GizmoCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -47,12 +47,12 @@ const gizmo = new GizmoCore({
 });
 
 async function run() {
-  const res = await applicationGetApplication(gizmo, "<id>");
+  const res = await applicationsGet(gizmo, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("applicationGetApplication failed:", res.error);
+    console.log("applicationsGet failed:", res.error);
   }
 }
 
@@ -79,7 +79,7 @@ run();
 | errors.ErrorResponse     | 400                      | application/json         |
 | errors.GizmoDefaultError | 4XX, 5XX                 | \*/\*                    |
 
-## updateApplication
+## update
 
 Update Application
 
@@ -94,7 +94,7 @@ const gizmo = new Gizmo({
 });
 
 async function run() {
-  const result = await gizmo.application.updateApplication("<id>");
+  const result = await gizmo.applications.update("<id>", {});
 
   console.log(result);
 }
@@ -108,7 +108,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GizmoCore } from "@gizmo-os/sdk/core.js";
-import { applicationUpdateApplication } from "@gizmo-os/sdk/funcs/applicationUpdateApplication.js";
+import { applicationsUpdate } from "@gizmo-os/sdk/funcs/applicationsUpdate.js";
 
 // Use `GizmoCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -117,12 +117,12 @@ const gizmo = new GizmoCore({
 });
 
 async function run() {
-  const res = await applicationUpdateApplication(gizmo, "<id>");
+  const res = await applicationsUpdate(gizmo, "<id>", {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("applicationUpdateApplication failed:", res.error);
+    console.log("applicationsUpdate failed:", res.error);
   }
 }
 
@@ -134,7 +134,7 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |
-| `requestBody`                                                                                                                                                                  | [operations.UpdateApplicationRequestBody](../../models/operations/updateapplicationrequestbody.md)                                                                             | :heavy_minus_sign:                                                                                                                                                             | N/A                                                                                                                                                                            |
+| `requestBody`                                                                                                                                                                  | [operations.UpdateApplicationRequestBody](../../models/operations/updateapplicationrequestbody.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -150,7 +150,7 @@ run();
 | errors.ErrorResponse     | 400                      | application/json         |
 | errors.GizmoDefaultError | 4XX, 5XX                 | \*/\*                    |
 
-## createApplication
+## create
 
 Create Application
 
@@ -165,7 +165,7 @@ const gizmo = new Gizmo({
 });
 
 async function run() {
-  const result = await gizmo.application.createApplication();
+  const result = await gizmo.applications.create();
 
   console.log(result);
 }
@@ -179,7 +179,7 @@ The standalone function version of this method:
 
 ```typescript
 import { GizmoCore } from "@gizmo-os/sdk/core.js";
-import { applicationCreateApplication } from "@gizmo-os/sdk/funcs/applicationCreateApplication.js";
+import { applicationsCreate } from "@gizmo-os/sdk/funcs/applicationsCreate.js";
 
 // Use `GizmoCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -188,12 +188,12 @@ const gizmo = new GizmoCore({
 });
 
 async function run() {
-  const res = await applicationCreateApplication(gizmo);
+  const res = await applicationsCreate(gizmo);
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("applicationCreateApplication failed:", res.error);
+    console.log("applicationsCreate failed:", res.error);
   }
 }
 

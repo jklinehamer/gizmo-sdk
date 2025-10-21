@@ -3,11 +3,11 @@
  */
 
 import { ClientSDK } from "../lib/sdks.js";
-import { Application } from "./application.js";
+import { Applications } from "./applications.js";
 
 export class Gizmo extends ClientSDK {
-  private _application?: Application;
-  get application(): Application {
-    return (this._application ??= new Application(this._options));
+  private _applications?: Applications;
+  get applications(): Applications {
+    return (this._applications ??= new Applications(this._options));
   }
 }
