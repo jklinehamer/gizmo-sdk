@@ -8,6 +8,7 @@ import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
 import { GizmoError } from "../models/errors/gizmoerror.js";
 import {
@@ -17,9 +18,9 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as models from "../models/index.js";
 import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
@@ -27,13 +28,14 @@ import { Result } from "../types/fp.js";
 /**
  * Create Application
  */
-export function applicationsCreate(
+export function applicationCreateApplication(
   client: GizmoCore,
-  request: models.ApplicationInsert,
+  request?: operations.CreateApplicationRequest | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
     operations.CreateApplicationResponse,
+    | errors.ErrorResponse
     | GizmoError
     | ResponseValidationError
     | ConnectionError
@@ -53,12 +55,13 @@ export function applicationsCreate(
 
 async function $do(
   client: GizmoCore,
-  request: models.ApplicationInsert,
+  request?: operations.CreateApplicationRequest | undefined,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
       operations.CreateApplicationResponse,
+      | errors.ErrorResponse
       | GizmoError
       | ResponseValidationError
       | ConnectionError
@@ -73,14 +76,19 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => models.ApplicationInsert$outboundSchema.parse(value),
+    (value) =>
+      operations.CreateApplicationRequest$outboundSchema.optional().parse(
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload, { explode: true });
+  const body = payload === undefined
+    ? null
+    : encodeJSON("body", payload, { explode: true });
 
   const path = pathToFunc("/applications")();
 
@@ -89,15 +97,19 @@ async function $do(
     Accept: "application/json",
   }));
 
+  const secConfig = await extractSecurity(client._options.bearerAuth);
+  const securityInput = secConfig == null ? {} : { bearerAuth: secConfig };
+  const requestSecurity = resolveGlobalSecurity(securityInput);
+
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "createApplication",
     oAuth2Scopes: null,
 
-    resolvedSecurity: null,
+    resolvedSecurity: requestSecurity,
 
-    securitySource: null,
+    securitySource: client._options.bearerAuth,
     retryConfig: options?.retries
       || client._options.retryConfig
       || { strategy: "none" },
@@ -105,6 +117,7 @@ async function $do(
   };
 
   const requestRes = client._createRequest(context, {
+    security: requestSecurity,
     method: "POST",
     baseURL: options?.serverURL,
     path: path,
@@ -120,7 +133,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["4XX", "5XX"],
+    errorCodes: ["400", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -129,8 +142,13 @@ async function $do(
   }
   const response = doResult.value;
 
+  const responseFields = {
+    HttpMeta: { Response: response, Request: req },
+  };
+
   const [result] = await M.match<
     operations.CreateApplicationResponse,
+    | errors.ErrorResponse
     | GizmoError
     | ResponseValidationError
     | ConnectionError
@@ -141,9 +159,10 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, operations.CreateApplicationResponse$inboundSchema),
+    M.jsonErr(400, errors.ErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response, req);
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

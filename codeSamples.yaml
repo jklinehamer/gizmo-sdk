@@ -1,0 +1,73 @@
+overlay: 1.0.0
+info:
+  title: CodeSamples overlay for typescript target
+  version: 0.0.0
+actions:
+  - target: $["paths"]["/applications"]["post"]
+    update:
+      x-codeSamples:
+        - lang: typescript
+          label: Typescript (SDK)
+          source: |-
+            import { Gizmo } from "@gizmo-os/sdk";
+
+            const gizmo = new Gizmo();
+
+            async function run() {
+              const result = await gizmo.applications.create({
+                firstName: "Juliet",
+                lastName: "Schuppe",
+                phone: "322.625.7472",
+                state: "ky",
+                leadProviderSlug: "<value>",
+                orgId: "<id>",
+              });
+
+              console.log(result);
+            }
+
+            run();
+  - target: $["paths"]["/applications/{id}"]["get"]
+    update:
+      x-codeSamples:
+        - lang: typescript
+          label: Typescript (SDK)
+          source: |-
+            import { Gizmo } from "@gizmo-os/sdk";
+
+            const gizmo = new Gizmo();
+
+            async function run() {
+              const result = await gizmo.applications.get({
+                id: "423",
+              });
+
+              console.log(result);
+            }
+
+            run();
+  - target: $["paths"]["/applications/{id}"]["patch"]
+    update:
+      x-codeSamples:
+        - lang: typescript
+          label: Typescript (SDK)
+          source: |-
+            import { Gizmo } from "@gizmo-os/sdk";
+
+            const gizmo = new Gizmo();
+
+            async function run() {
+              await gizmo.applications.update({
+                id: "423",
+                applicationPatch: {
+                  id: {
+                    id: "423",
+                  },
+                  status: "FUNDED",
+                },
+              });
+
+
+            }
+
+            run();

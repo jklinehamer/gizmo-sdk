@@ -12,12 +12,14 @@ import { Params, pathToFunc } from "./url.js";
  */
 export const ServerList = [
   /**
-   * Production server
+   * Gizmo Production API
    */
-  "https://core.usegizmo.com/v1",
+  "https://polished-gerbil-615.convex.site/v1",
 ] as const;
 
 export type SDKOptions = {
+  bearerAuth?: string | (() => Promise<string>) | undefined;
+
   httpClient?: HTTPClient;
   /**
    * Allows overriding the default server used by the SDK
@@ -59,7 +61,7 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
 export const SDK_METADATA = {
   language: "typescript",
   openapiDocVersion: "1.0.0",
-  sdkVersion: "0.1.3",
+  sdkVersion: "0.2.4",
   genVersion: "2.727.9",
-  userAgent: "speakeasy-sdk/typescript 0.1.3 2.727.9 1.0.0 @gizmo-os/sdk",
+  userAgent: "speakeasy-sdk/typescript 0.2.4 2.727.9 1.0.0 @gizmo-os/sdk",
 } as const;

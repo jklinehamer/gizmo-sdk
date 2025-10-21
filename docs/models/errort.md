@@ -1,13 +1,13 @@
-# NotFoundError
-
-Application not found
+# ErrorT
 
 ## Example Usage
 
 ```typescript
-import { NotFoundError } from "@gizmo-os/sdk/models/errors";
+import { ErrorT } from "@gizmo-os/sdk/models";
 
-// No examples available for this model
+let value: ErrorT = {
+  message: "<value>",
+};
 ```
 
 ## Fields

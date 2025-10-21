@@ -26,7 +26,7 @@ Developer-friendly & type-safe Typescript SDK specifically catered to leverage *
 <!-- Start Summary [summary] -->
 ## Summary
 
-For more information about the API: [Find out more about Gizmo REST API](www.usegizmo.com)
+Gizmo: Gizmo REST API
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
@@ -36,6 +36,7 @@ For more information about the API: [Find out more about Gizmo REST API](www.use
   * [SDK Installation](#sdk-installation)
   * [Requirements](#requirements)
   * [SDK Example Usage](#sdk-example-usage)
+  * [Authentication](#authentication)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Standalone functions](#standalone-functions)
   * [Retries](#retries)
@@ -96,12 +97,12 @@ For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 ```typescript
 import { Gizmo } from "@gizmo-os/sdk";
 
-const gizmo = new Gizmo();
+const gizmo = new Gizmo({
+  bearerAuth: process.env["GIZMO_BEARER_AUTH"] ?? "",
+});
 
 async function run() {
-  const result = await gizmo.applications.get({
-    id: "423",
-  });
+  const result = await gizmo.application.getApplication("423");
 
   console.log(result);
 }
@@ -111,17 +112,47 @@ run();
 ```
 <!-- End SDK Example Usage [usage] -->
 
+<!-- Start Authentication [security] -->
+## Authentication
+
+### Per-Client Security Schemes
+
+This SDK supports the following security scheme globally:
+
+| Name         | Type | Scheme      | Environment Variable |
+| ------------ | ---- | ----------- | -------------------- |
+| `bearerAuth` | http | HTTP Bearer | `GIZMO_BEARER_AUTH`  |
+
+To authenticate with the API the `bearerAuth` parameter must be set when initializing the SDK client instance. For example:
+```typescript
+import { Gizmo } from "@gizmo-os/sdk";
+
+const gizmo = new Gizmo({
+  bearerAuth: process.env["GIZMO_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await gizmo.application.getApplication("423");
+
+  console.log(result);
+}
+
+run();
+
+```
+<!-- End Authentication [security] -->
+
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
 
 <details open>
 <summary>Available methods</summary>
 
-### [applications](docs/sdks/applications/README.md)
+### [application](docs/sdks/application/README.md)
 
-* [get](docs/sdks/applications/README.md#get) - Get Application
-* [update](docs/sdks/applications/README.md#update) - Update Application
-* [create](docs/sdks/applications/README.md#create) - Create Application
+* [getApplication](docs/sdks/application/README.md#getapplication) - Get Application
+* [updateApplication](docs/sdks/application/README.md#updateapplication) - Update Application
+* [createApplication](docs/sdks/application/README.md#createapplication) - Create Application
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -141,9 +172,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
-- [`applicationsCreate`](docs/sdks/applications/README.md#create) - Create Application
-- [`applicationsGet`](docs/sdks/applications/README.md#get) - Get Application
-- [`applicationsUpdate`](docs/sdks/applications/README.md#update) - Update Application
+- [`applicationCreateApplication`](docs/sdks/application/README.md#createapplication) - Create Application
+- [`applicationGetApplication`](docs/sdks/application/README.md#getapplication) - Get Application
+- [`applicationUpdateApplication`](docs/sdks/application/README.md#updateapplication) - Update Application
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
@@ -157,12 +188,12 @@ To change the default retry strategy for a single API call, simply provide a ret
 ```typescript
 import { Gizmo } from "@gizmo-os/sdk";
 
-const gizmo = new Gizmo();
+const gizmo = new Gizmo({
+  bearerAuth: process.env["GIZMO_BEARER_AUTH"] ?? "",
+});
 
 async function run() {
-  const result = await gizmo.applications.get({
-    id: "423",
-  }, {
+  const result = await gizmo.application.getApplication("423", {
     retries: {
       strategy: "backoff",
       backoff: {
@@ -197,12 +228,11 @@ const gizmo = new Gizmo({
     },
     retryConnectionErrors: false,
   },
+  bearerAuth: process.env["GIZMO_BEARER_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gizmo.applications.get({
-    id: "423",
-  });
+  const result = await gizmo.application.getApplication("423");
 
   console.log(result);
 }
@@ -231,13 +261,13 @@ run();
 import { Gizmo } from "@gizmo-os/sdk";
 import * as errors from "@gizmo-os/sdk/models/errors";
 
-const gizmo = new Gizmo();
+const gizmo = new Gizmo({
+  bearerAuth: process.env["GIZMO_BEARER_AUTH"] ?? "",
+});
 
 async function run() {
   try {
-    const result = await gizmo.applications.get({
-      id: "423",
-    });
+    const result = await gizmo.application.getApplication("423");
 
     console.log(result);
   } catch (error) {
@@ -249,8 +279,8 @@ async function run() {
       console.log(error.headers);
 
       // Depending on the method different errors may be thrown
-      if (error instanceof errors.NotFoundError) {
-        console.log(error.data$.message); // string
+      if (error instanceof errors.ErrorResponse) {
+        console.log(error.data$.error); // models.ErrorT
       }
     }
   }
@@ -261,10 +291,11 @@ run();
 ```
 
 ### Error Classes
-**Primary error:**
+**Primary errors:**
 * [`GizmoError`](./src/models/errors/gizmoerror.ts): The base class for HTTP error responses.
+  * [`ErrorResponse`](./src/models/errors/errorresponse.ts): Error response object. Status code `400`.
 
-<details><summary>Less common errors (8)</summary>
+<details><summary>Less common errors (6)</summary>
 
 <br />
 
@@ -277,13 +308,9 @@ run();
 
 
 **Inherit from [`GizmoError`](./src/models/errors/gizmoerror.ts)**:
-* [`NotFoundError`](./src/models/errors/notfounderror.ts): Application not found. Status code `404`. Applicable to 1 of 3 methods.*
-* [`UnprocessableEntityError`](./src/models/errors/unprocessableentityerror.ts): Invalid id error. Status code `422`. Applicable to 1 of 3 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
-
-\* Check [the method documentation](#available-resources-and-operations) to see if the error is applicable.
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->
@@ -296,13 +323,12 @@ The default server can be overridden globally by passing a URL to the `serverURL
 import { Gizmo } from "@gizmo-os/sdk";
 
 const gizmo = new Gizmo({
-  serverURL: "https://core.usegizmo.com/v1",
+  serverURL: "https://polished-gerbil-615.convex.site/v1",
+  bearerAuth: process.env["GIZMO_BEARER_AUTH"] ?? "",
 });
 
 async function run() {
-  const result = await gizmo.applications.get({
-    id: "423",
-  });
+  const result = await gizmo.application.getApplication("423");
 
   console.log(result);
 }

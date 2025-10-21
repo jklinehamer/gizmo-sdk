@@ -9,10 +9,125 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as models from "../index.js";
 
+export type UpdateApplicationRequestBody = {
+  loanPurpose?: models.LoanPurpose | undefined;
+  crmId?: string | undefined;
+  losId?: string | undefined;
+  primaryBorrowerDateOfBirth?: string | undefined;
+  primaryBorrowerSsn?: string | undefined;
+  primaryBorrowerEmail?: string | undefined;
+  primaryBorrowerFirstName?: string | undefined;
+  primaryBorrowerLastName?: string | undefined;
+  primaryBorrowerPhone?: string | undefined;
+  status?: models.Milestone | undefined;
+  subjectPropertyCity?: string | undefined;
+  /**
+   * The two-letter state abbreviation in lowercase
+   */
+  subjectPropertyState?: models.State | undefined;
+  subjectPropertyStreetAddress?: string | undefined;
+  subjectPropertyZip?: string | undefined;
+};
+
 export type UpdateApplicationRequest = {
   id: string;
-  applicationPatch: models.ApplicationPatch;
+  requestBody?: UpdateApplicationRequestBody | undefined;
 };
+
+/** @internal */
+export const UpdateApplicationRequestBody$inboundSchema: z.ZodType<
+  UpdateApplicationRequestBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  loanPurpose: models.LoanPurpose$inboundSchema.optional(),
+  crmId: z.string().optional(),
+  losId: z.string().optional(),
+  primaryBorrowerDateOfBirth: z.string().optional(),
+  primaryBorrowerSsn: z.string().optional(),
+  primaryBorrowerEmail: z.string().optional(),
+  primaryBorrowerFirstName: z.string().optional(),
+  primaryBorrowerLastName: z.string().optional(),
+  primaryBorrowerPhone: z.string().optional(),
+  status: models.Milestone$inboundSchema.optional(),
+  subjectPropertyCity: z.string().optional(),
+  subjectPropertyState: models.State$inboundSchema.optional(),
+  subjectPropertyStreetAddress: z.string().optional(),
+  subjectPropertyZip: z.string().optional(),
+});
+
+/** @internal */
+export type UpdateApplicationRequestBody$Outbound = {
+  loanPurpose?: string | undefined;
+  crmId?: string | undefined;
+  losId?: string | undefined;
+  primaryBorrowerDateOfBirth?: string | undefined;
+  primaryBorrowerSsn?: string | undefined;
+  primaryBorrowerEmail?: string | undefined;
+  primaryBorrowerFirstName?: string | undefined;
+  primaryBorrowerLastName?: string | undefined;
+  primaryBorrowerPhone?: string | undefined;
+  status?: string | undefined;
+  subjectPropertyCity?: string | undefined;
+  subjectPropertyState?: string | undefined;
+  subjectPropertyStreetAddress?: string | undefined;
+  subjectPropertyZip?: string | undefined;
+};
+
+/** @internal */
+export const UpdateApplicationRequestBody$outboundSchema: z.ZodType<
+  UpdateApplicationRequestBody$Outbound,
+  z.ZodTypeDef,
+  UpdateApplicationRequestBody
+> = z.object({
+  loanPurpose: models.LoanPurpose$outboundSchema.optional(),
+  crmId: z.string().optional(),
+  losId: z.string().optional(),
+  primaryBorrowerDateOfBirth: z.string().optional(),
+  primaryBorrowerSsn: z.string().optional(),
+  primaryBorrowerEmail: z.string().optional(),
+  primaryBorrowerFirstName: z.string().optional(),
+  primaryBorrowerLastName: z.string().optional(),
+  primaryBorrowerPhone: z.string().optional(),
+  status: models.Milestone$outboundSchema.optional(),
+  subjectPropertyCity: z.string().optional(),
+  subjectPropertyState: models.State$outboundSchema.optional(),
+  subjectPropertyStreetAddress: z.string().optional(),
+  subjectPropertyZip: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateApplicationRequestBody$ {
+  /** @deprecated use `UpdateApplicationRequestBody$inboundSchema` instead. */
+  export const inboundSchema = UpdateApplicationRequestBody$inboundSchema;
+  /** @deprecated use `UpdateApplicationRequestBody$outboundSchema` instead. */
+  export const outboundSchema = UpdateApplicationRequestBody$outboundSchema;
+  /** @deprecated use `UpdateApplicationRequestBody$Outbound` instead. */
+  export type Outbound = UpdateApplicationRequestBody$Outbound;
+}
+
+export function updateApplicationRequestBodyToJSON(
+  updateApplicationRequestBody: UpdateApplicationRequestBody,
+): string {
+  return JSON.stringify(
+    UpdateApplicationRequestBody$outboundSchema.parse(
+      updateApplicationRequestBody,
+    ),
+  );
+}
+
+export function updateApplicationRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateApplicationRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateApplicationRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateApplicationRequestBody' from JSON`,
+  );
+}
 
 /** @internal */
 export const UpdateApplicationRequest$inboundSchema: z.ZodType<
@@ -21,17 +136,18 @@ export const UpdateApplicationRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  ApplicationPatch: models.ApplicationPatch$inboundSchema,
+  RequestBody: z.lazy(() => UpdateApplicationRequestBody$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
-    "ApplicationPatch": "applicationPatch",
+    "RequestBody": "requestBody",
   });
 });
 
 /** @internal */
 export type UpdateApplicationRequest$Outbound = {
   id: string;
-  ApplicationPatch: models.ApplicationPatch$Outbound;
+  RequestBody?: UpdateApplicationRequestBody$Outbound | undefined;
 };
 
 /** @internal */
@@ -41,10 +157,11 @@ export const UpdateApplicationRequest$outboundSchema: z.ZodType<
   UpdateApplicationRequest
 > = z.object({
   id: z.string(),
-  applicationPatch: models.ApplicationPatch$outboundSchema,
+  requestBody: z.lazy(() => UpdateApplicationRequestBody$outboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
-    applicationPatch: "ApplicationPatch",
+    requestBody: "RequestBody",
   });
 });
 

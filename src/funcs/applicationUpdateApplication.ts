@@ -9,6 +9,7 @@ import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
+import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
 import { GizmoError } from "../models/errors/gizmoerror.js";
 import {
@@ -18,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
@@ -27,13 +29,15 @@ import { Result } from "../types/fp.js";
 /**
  * Update Application
  */
-export function applicationsUpdate(
+export function applicationUpdateApplication(
   client: GizmoCore,
-  request: operations.UpdateApplicationRequest,
+  id: string,
+  requestBody?: operations.UpdateApplicationRequestBody | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    void,
+    any,
+    | errors.ErrorResponse
     | GizmoError
     | ResponseValidationError
     | ConnectionError
@@ -46,19 +50,22 @@ export function applicationsUpdate(
 > {
   return new APIPromise($do(
     client,
-    request,
+    id,
+    requestBody,
     options,
   ));
 }
 
 async function $do(
   client: GizmoCore,
-  request: operations.UpdateApplicationRequest,
+  id: string,
+  requestBody?: operations.UpdateApplicationRequestBody | undefined,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      void,
+      any,
+      | errors.ErrorResponse
       | GizmoError
       | ResponseValidationError
       | ConnectionError
@@ -71,8 +78,13 @@ async function $do(
     APICall,
   ]
 > {
+  const input: operations.UpdateApplicationRequest = {
+    id: id,
+    requestBody: requestBody,
+  };
+
   const parsed = safeParse(
-    request,
+    input,
     (value) => operations.UpdateApplicationRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
@@ -80,7 +92,7 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.ApplicationPatch, { explode: true });
+  const body = encodeJSON("body", payload.RequestBody, { explode: true });
 
   const pathParams = {
     id: encodeSimple("id", payload.id, {
@@ -93,8 +105,12 @@ async function $do(
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
-    Accept: "*/*",
+    Accept: "application/json",
   }));
+
+  const secConfig = await extractSecurity(client._options.bearerAuth);
+  const securityInput = secConfig == null ? {} : { bearerAuth: secConfig };
+  const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
     options: client._options,
@@ -102,9 +118,9 @@ async function $do(
     operationID: "updateApplication",
     oAuth2Scopes: null,
 
-    resolvedSecurity: null,
+    resolvedSecurity: requestSecurity,
 
-    securitySource: null,
+    securitySource: client._options.bearerAuth,
     retryConfig: options?.retries
       || client._options.retryConfig
       || { strategy: "none" },
@@ -112,6 +128,7 @@ async function $do(
   };
 
   const requestRes = client._createRequest(context, {
+    security: requestSecurity,
     method: "PATCH",
     baseURL: options?.serverURL,
     path: path,
@@ -127,7 +144,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["4XX", "5XX"],
+    errorCodes: ["400", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -136,8 +153,13 @@ async function $do(
   }
   const response = doResult.value;
 
+  const responseFields = {
+    HttpMeta: { Response: response, Request: req },
+  };
+
   const [result] = await M.match<
-    void,
+    any,
+    | errors.ErrorResponse
     | GizmoError
     | ResponseValidationError
     | ConnectionError
@@ -147,10 +169,11 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.nil(204, z.void()),
+    M.json(200, z.any()),
+    M.jsonErr(400, errors.ErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response, req);
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

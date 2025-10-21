@@ -29,14 +29,14 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 typescript:
-  version: 0.1.3
+  version: 0.2.4
   acceptHeaderEnum: false
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
     peerDependencies: {}
   additionalPackageJSON: {}
-  author: Speakeasy
+  author: Gizmo
   baseErrorName: GizmoError
   clientServerStatusCodesAsErrors: true
   constFieldsAlwaysOptional: false
@@ -59,7 +59,7 @@ typescript:
       webhooks: models/webhooks
   inputModelSuffix: input
   jsonpath: rfc9535
-  maxMethodParams: 0
+  maxMethodParams: 3
   methodArguments: infer-optional-args
   modelPropertyCasing: camel
   moduleFormat: dual

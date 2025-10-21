@@ -2,12 +2,12 @@
 ```typescript
 import { Gizmo } from "@gizmo-os/sdk";
 
-const gizmo = new Gizmo();
+const gizmo = new Gizmo({
+  bearerAuth: process.env["GIZMO_BEARER_AUTH"] ?? "",
+});
 
 async function run() {
-  const result = await gizmo.applications.get({
-    id: "423",
-  });
+  const result = await gizmo.application.getApplication("423");
 
   console.log(result);
 }

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: d5b937e1-f06a-47e1-88df-7de294f90dcf
 management:
-  docChecksum: 40dc8f4a268178971ff751da9dda2045
+  docChecksum: bd854c1ce9bed13a06dc74a93a482b6b
   docVersion: 1.0.0
-  speakeasyVersion: 1.637.2
+  speakeasyVersion: 1.637.3
   generationVersion: 2.727.9
-  releaseVersion: 0.1.3
-  configChecksum: 691feff5196d294c592f37e9e27f0dbc
+  releaseVersion: 0.2.4
+  configChecksum: 510f550112c72f8b94b74913eb975fc1
   repoURL: https://github.com/jklinehamer/gizmo-sdk.git
   installationURL: https://github.com/jklinehamer/gizmo-sdk
   published: true
@@ -18,14 +18,16 @@ features:
     devContainers: 2.90.1
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
+    flattening: 2.82.1
+    globalSecurity: 2.82.14
     globalSecurityCallbacks: 0.1.0
+    globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.5
     methodArguments: 0.1.2
-    nameOverrides: 2.81.2
+    nullables: 0.1.1
     responseFormat: 0.2.3
     retries: 2.83.0
     sdkHooks: 0.3.0
-    unions: 2.86.0
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
@@ -36,33 +38,30 @@ generatedFiles:
   - RUNTIMES.md
   - USAGE.md
   - docs/lib/utils/retryconfig.md
-  - docs/models/applicationinsert.md
-  - docs/models/applicationpatch.md
-  - docs/models/applicationpatchstatus.md
-  - docs/models/applicationselect.md
-  - docs/models/applicationselectstatus.md
-  - docs/models/errors/notfounderror.md
-  - docs/models/errors/unprocessableentityerror.md
-  - docs/models/id.md
+  - docs/models/application.md
+  - docs/models/errors/errorresponse.md
+  - docs/models/errort.md
+  - docs/models/loanpurpose.md
+  - docs/models/milestone.md
+  - docs/models/operations/createapplicationrequest.md
   - docs/models/operations/createapplicationresponse.md
-  - docs/models/operations/errort.md
   - docs/models/operations/getapplicationrequest.md
-  - docs/models/operations/issue.md
-  - docs/models/operations/path.md
   - docs/models/operations/updateapplicationrequest.md
+  - docs/models/operations/updateapplicationrequestbody.md
+  - docs/models/security.md
   - docs/models/state.md
-  - docs/sdks/applications/README.md
+  - docs/sdks/application/README.md
   - eslint.config.mjs
   - examples/.env.template
   - examples/README.md
-  - examples/applicationsGet.example.ts
+  - examples/applicationGetApplication.example.ts
   - examples/package.json
   - jsr.json
   - package.json
   - src/core.ts
-  - src/funcs/applicationsCreate.ts
-  - src/funcs/applicationsGet.ts
-  - src/funcs/applicationsUpdate.ts
+  - src/funcs/applicationCreateApplication.ts
+  - src/funcs/applicationGetApplication.ts
+  - src/funcs/applicationUpdateApplication.ts
   - src/hooks/hooks.ts
   - src/hooks/index.ts
   - src/hooks/types.ts
@@ -83,10 +82,9 @@ generatedFiles:
   - src/lib/sdks.ts
   - src/lib/security.ts
   - src/lib/url.ts
-  - src/models/applicationinsert.ts
-  - src/models/applicationpatch.ts
-  - src/models/applicationselect.ts
-  - src/models/errors/getapplication.ts
+  - src/models/application.ts
+  - src/models/errorresponse.ts
+  - src/models/errors/errorresponse.ts
   - src/models/errors/gizmodefaulterror.ts
   - src/models/errors/gizmoerror.ts
   - src/models/errors/httpclienterrors.ts
@@ -94,11 +92,15 @@ generatedFiles:
   - src/models/errors/responsevalidationerror.ts
   - src/models/errors/sdkvalidationerror.ts
   - src/models/index.ts
+  - src/models/loanpurpose.ts
+  - src/models/milestone.ts
   - src/models/operations/createapplication.ts
   - src/models/operations/getapplication.ts
   - src/models/operations/index.ts
   - src/models/operations/updateapplication.ts
-  - src/sdk/applications.ts
+  - src/models/security.ts
+  - src/models/state.ts
+  - src/sdk/application.ts
   - src/sdk/index.ts
   - src/sdk/sdk.ts
   - src/types/async.ts
@@ -119,11 +121,13 @@ examples:
           id: "423"
       responses:
         "200":
-          application/json: {"id": "<id>", "createdAt": 2332.48, "status": "PRE_APPROVED", "timezone": "America/Creston", "primaryBorrowerId": "<id>"}
+          application/json: {"id": "<id>", "orgId": "<id>", "createdAt": 2332.48, "status": "PRE_APPROVED", "primaryBorrowerFirstName": "<value>", "primaryBorrowerLastName": "<value>", "primaryBorrowerEmail": "<value>", "primaryBorrowerPhone": "<value>", "subjectPropertyState": "hi", "leadProviderSlug": "<value>"}
         "404":
           application/json: {"message": "<value>"}
         "422":
           application/json: {"success": true, "error": {"issues": [], "name": "<value>"}}
+        "400":
+          application/json: {"error": {"message": "<value>"}}
   updateApplication:
     speakeasy-default-update-application:
       parameters:
@@ -131,6 +135,11 @@ examples:
           id: "423"
       requestBody:
         application/json: {"id": {"id": "423"}, "status": "FUNDED"}
+      responses:
+        "200":
+          application/json: "<value>"
+        "400":
+          application/json: {"error": {"message": "<value>"}}
   createApplication:
     speakeasy-default-create-application:
       requestBody:
@@ -138,4 +147,6 @@ examples:
       responses:
         "200":
           application/json: {"id": "<id>"}
+        "400":
+          application/json: {"error": {"message": "<value>"}}
 examplesVersion: 1.0.2
