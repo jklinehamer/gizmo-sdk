@@ -24,7 +24,7 @@ const gizmo = new Gizmo({
 });
 
 async function run() {
-  const result = await gizmo.application.getApplication("423");
+  const result = await gizmo.application.getApplication("<id>");
 
   console.log(result);
 }
@@ -47,7 +47,7 @@ const gizmo = new GizmoCore({
 });
 
 async function run() {
-  const res = await applicationGetApplication(gizmo, "423");
+  const res = await applicationGetApplication(gizmo, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -94,9 +94,7 @@ const gizmo = new Gizmo({
 });
 
 async function run() {
-  const result = await gizmo.application.updateApplication("423", {
-    status: "FUNDED",
-  });
+  const result = await gizmo.application.updateApplication("<id>");
 
   console.log(result);
 }
@@ -119,9 +117,7 @@ const gizmo = new GizmoCore({
 });
 
 async function run() {
-  const res = await applicationUpdateApplication(gizmo, "423", {
-    status: "FUNDED",
-  });
+  const res = await applicationUpdateApplication(gizmo, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -169,14 +165,7 @@ const gizmo = new Gizmo({
 });
 
 async function run() {
-  const result = await gizmo.application.createApplication({
-    primaryBorrowerFirstName: "<value>",
-    primaryBorrowerLastName: "<value>",
-    primaryBorrowerEmail: "<value>",
-    primaryBorrowerPhone: "<value>",
-    subjectPropertyState: "mt",
-    leadProviderSlug: "<value>",
-  });
+  const result = await gizmo.application.createApplication();
 
   console.log(result);
 }
@@ -199,14 +188,7 @@ const gizmo = new GizmoCore({
 });
 
 async function run() {
-  const res = await applicationCreateApplication(gizmo, {
-    primaryBorrowerFirstName: "<value>",
-    primaryBorrowerLastName: "<value>",
-    primaryBorrowerEmail: "<value>",
-    primaryBorrowerPhone: "<value>",
-    subjectPropertyState: "sd",
-    leadProviderSlug: "<value>",
-  });
+  const res = await applicationCreateApplication(gizmo);
   if (res.ok) {
     const { value: result } = res;
     console.log(result);

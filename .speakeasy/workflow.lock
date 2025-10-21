@@ -1,12 +1,5 @@
 speakeasyVersion: 1.637.3
 sources:
-    Gizmo REST API:
-        sourceNamespace: gizmo-rest-api
-        sourceRevisionDigest: sha256:d46f0af2bedbb35efbd911a8a87bc628b71918a5f7f7cf313ca5a88a724e141e
-        sourceBlobDigest: sha256:07da7cdd4e14ac9cdcec76a4579ce929dd065711895612767f0ed7095df4aa45
-        tags:
-            - latest
-            - 1.0.0
     main:
         sourceNamespace: main
         sourceRevisionDigest: sha256:8b97a1d60218c2ac430425608e06a91c1ae2f4434b58b626754dd26fe8a359ef

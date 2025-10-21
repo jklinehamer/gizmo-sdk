@@ -1,5 +1,5 @@
 lockVersion: 2.0.0
-id: d5b937e1-f06a-47e1-88df-7de294f90dcf
+id: 23e668fd-4c5a-4bde-b06e-eba340901bc5
 management:
   docChecksum: c86f5937b235e72198e702727ddddbb3
   docVersion: 1.0.0
@@ -118,23 +118,17 @@ examples:
     speakeasy-default-get-application:
       parameters:
         path:
-          id: "423"
+          id: "<id>"
       responses:
         "200":
           application/json: {"id": "<id>", "orgId": "<id>", "createdAt": 2332.48, "status": "PRE_APPROVED", "primaryBorrowerFirstName": "<value>", "primaryBorrowerLastName": "<value>", "primaryBorrowerEmail": "<value>", "primaryBorrowerPhone": "<value>", "subjectPropertyState": "hi", "leadProviderSlug": "<value>"}
-        "404":
-          application/json: {"message": "<value>"}
-        "422":
-          application/json: {"success": true, "error": {"issues": [], "name": "<value>"}}
         "400":
           application/json: {"error": {"message": "<value>"}}
   updateApplication:
     speakeasy-default-update-application:
       parameters:
         path:
-          id: "423"
-      requestBody:
-        application/json: {"id": {"id": "423"}, "status": "FUNDED"}
+          id: "<id>"
       responses:
         "200":
           application/json: "<value>"
@@ -142,8 +136,6 @@ examples:
           application/json: {"error": {"message": "<value>"}}
   createApplication:
     speakeasy-default-create-application:
-      requestBody:
-        application/json: {"firstName": "Juliet", "lastName": "Schuppe", "phone": "322.625.7472", "state": "ky", "leadProviderSlug": "<value>", "orgId": "<id>"}
       responses:
         "200":
           application/json: {"id": "<id>"}

@@ -102,7 +102,7 @@ const gizmo = new Gizmo({
 });
 
 async function run() {
-  const result = await gizmo.application.getApplication("423");
+  const result = await gizmo.application.getApplication("<id>");
 
   console.log(result);
 }
@@ -132,7 +132,7 @@ const gizmo = new Gizmo({
 });
 
 async function run() {
-  const result = await gizmo.application.getApplication("423");
+  const result = await gizmo.application.getApplication("<id>");
 
   console.log(result);
 }
@@ -193,7 +193,7 @@ const gizmo = new Gizmo({
 });
 
 async function run() {
-  const result = await gizmo.application.getApplication("423", {
+  const result = await gizmo.application.getApplication("<id>", {
     retries: {
       strategy: "backoff",
       backoff: {
@@ -232,7 +232,7 @@ const gizmo = new Gizmo({
 });
 
 async function run() {
-  const result = await gizmo.application.getApplication("423");
+  const result = await gizmo.application.getApplication("<id>");
 
   console.log(result);
 }
@@ -267,7 +267,7 @@ const gizmo = new Gizmo({
 
 async function run() {
   try {
-    const result = await gizmo.application.getApplication("423");
+    const result = await gizmo.application.getApplication("<id>");
 
     console.log(result);
   } catch (error) {
@@ -328,7 +328,7 @@ const gizmo = new Gizmo({
 });
 
 async function run() {
-  const result = await gizmo.application.getApplication("423");
+  const result = await gizmo.application.getApplication("<id>");
 
   console.log(result);
 }
