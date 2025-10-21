@@ -14,7 +14,7 @@ export const ServerList = [
   /**
    * Gizmo Production API
    */
-  "https://polished-gerbil-615.convex.site/v1",
+  "https://core.usegizmo.com/v1",
 ] as const;
 
 export type SDKOptions = {
@@ -61,7 +61,7 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
 export const SDK_METADATA = {
   language: "typescript",
   openapiDocVersion: "1.0.0",
-  sdkVersion: "0.2.4",
+  sdkVersion: "0.2.6",
   genVersion: "2.727.9",
-  userAgent: "speakeasy-sdk/typescript 0.2.4 2.727.9 1.0.0 @gizmo-os/sdk",
+  userAgent: "speakeasy-sdk/typescript 0.2.6 2.727.9 1.0.0 @gizmo-os/sdk",
 } as const;
