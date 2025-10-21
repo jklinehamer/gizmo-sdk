@@ -1,6 +1,6 @@
 {
   "name": "@gizmo-os/sdk",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "author": "Gizmo",
   "type": "module",
   "tshy": {
