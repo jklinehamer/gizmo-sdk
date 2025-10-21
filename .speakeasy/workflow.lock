@@ -13,6 +13,7 @@ sources:
         sourceBlobDigest: sha256:82e5a15a56b740c7b4105f65916357e5c0d7f33d01430b0d5c5561b4b342832e
         tags:
             - latest
+            - speakeasy-sdk-regen-1761009138
             - 1.0.0
 targets:
     gizmo:
@@ -21,7 +22,7 @@ targets:
         sourceRevisionDigest: sha256:8b97a1d60218c2ac430425608e06a91c1ae2f4434b58b626754dd26fe8a359ef
         sourceBlobDigest: sha256:82e5a15a56b740c7b4105f65916357e5c0d7f33d01430b0d5c5561b4b342832e
         codeSamplesNamespace: main-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:79029caf79e70982476a6581f2cb76be64bffa65b6f1625ed46ab68f250e8e6a
+        codeSamplesRevisionDigest: sha256:d2bd8a9d95ef5bb4addb4b7c5a15a9d69415a908e6fc803351783ba009181642
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -36,6 +37,9 @@ workflow:
         gizmo:
             target: typescript
             source: main
+            publish:
+                npm:
+                    token: $npm_token
             codeSamples:
                 registry:
                     location: registry.speakeasyapi.dev/gizmo-2xw/prod/main-typescript-code-samples
