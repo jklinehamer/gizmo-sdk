@@ -3,13 +3,20 @@ speakeasyVersion: latest
 sources:
     main:
         inputs:
-            - location: https://polished-gerbil-615.convex.site/doc
+            - location: https://core.usegizmo.com/doc
+        output: ./openapi.yaml
         registry:
             location: registry.speakeasyapi.dev/gizmo-2xw/prod/main
 targets:
     gizmo:
         target: typescript
         source: main
+        publish:
+            npm:
+                token: $npm_token
         codeSamples:
             registry:
-                location: registry.speakeasyapi.dev/gizmo-2xw/prod/main
+                location: registry.speakeasyapi.dev/gizmo-2xw/prod/main-typescript-code-samples
+            labelOverride:
+                fixedValue: Typescript (SDK)
+            blocking: false

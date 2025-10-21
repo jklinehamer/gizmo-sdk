@@ -323,7 +323,7 @@ The default server can be overridden globally by passing a URL to the `serverURL
 import { Gizmo } from "@gizmo-os/sdk";
 
 const gizmo = new Gizmo({
-  serverURL: "https://polished-gerbil-615.convex.site/v1",
+  serverURL: "https://core.usegizmo.com/v1",
   bearerAuth: process.env["GIZMO_BEARER_AUTH"] ?? "",
 });
 

@@ -9,8 +9,8 @@ sources:
             - 1.0.0
     main:
         sourceNamespace: main
-        sourceRevisionDigest: sha256:3060868f0e8536854864c5b3bdd3624406ff1c33cf442d8c654d9c6d30b5882d
-        sourceBlobDigest: sha256:4c2530e97ed95d1cebc34e69bb58fdc3644cb9932e5e931ba12c06b426fa7028
+        sourceRevisionDigest: sha256:8b97a1d60218c2ac430425608e06a91c1ae2f4434b58b626754dd26fe8a359ef
+        sourceBlobDigest: sha256:82e5a15a56b740c7b4105f65916357e5c0d7f33d01430b0d5c5561b4b342832e
         tags:
             - latest
             - 1.0.0
@@ -18,17 +18,18 @@ targets:
     gizmo:
         source: main
         sourceNamespace: main
-        sourceRevisionDigest: sha256:3060868f0e8536854864c5b3bdd3624406ff1c33cf442d8c654d9c6d30b5882d
-        sourceBlobDigest: sha256:4c2530e97ed95d1cebc34e69bb58fdc3644cb9932e5e931ba12c06b426fa7028
-        codeSamplesNamespace: main
-        codeSamplesRevisionDigest: sha256:b1bb307cd42e153fa5fb465401fd11da7609adacc1d555486ba904376eb2cba5
+        sourceRevisionDigest: sha256:8b97a1d60218c2ac430425608e06a91c1ae2f4434b58b626754dd26fe8a359ef
+        sourceBlobDigest: sha256:82e5a15a56b740c7b4105f65916357e5c0d7f33d01430b0d5c5561b4b342832e
+        codeSamplesNamespace: main-typescript-code-samples
+        codeSamplesRevisionDigest: sha256:79029caf79e70982476a6581f2cb76be64bffa65b6f1625ed46ab68f250e8e6a
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
         main:
             inputs:
-                - location: https://polished-gerbil-615.convex.site/doc
+                - location: https://core.usegizmo.com/doc
+            output: ./openapi.yaml
             registry:
                 location: registry.speakeasyapi.dev/gizmo-2xw/prod/main
     targets:
@@ -37,4 +38,7 @@ workflow:
             source: main
             codeSamples:
                 registry:
-                    location: registry.speakeasyapi.dev/gizmo-2xw/prod/main
+                    location: registry.speakeasyapi.dev/gizmo-2xw/prod/main-typescript-code-samples
+                labelOverride:
+                    fixedValue: Typescript (SDK)
+                blocking: false
