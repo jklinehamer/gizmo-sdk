@@ -18,7 +18,7 @@ const gizmo = new Gizmo({
 });
 
 async function main() {
-  const result = await gizmo.application.getApplication("423");
+  const result = await gizmo.application.getApplication("<id>");
 
   console.log(result);
 }

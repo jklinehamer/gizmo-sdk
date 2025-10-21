@@ -1,12 +1,5 @@
 speakeasyVersion: 1.637.3
 sources:
-    Gizmo REST API:
-        sourceNamespace: gizmo-rest-api
-        sourceRevisionDigest: sha256:d46f0af2bedbb35efbd911a8a87bc628b71918a5f7f7cf313ca5a88a724e141e
-        sourceBlobDigest: sha256:07da7cdd4e14ac9cdcec76a4579ce929dd065711895612767f0ed7095df4aa45
-        tags:
-            - latest
-            - 1.0.0
     main:
         sourceNamespace: main
         sourceRevisionDigest: sha256:8b97a1d60218c2ac430425608e06a91c1ae2f4434b58b626754dd26fe8a359ef
@@ -21,7 +14,7 @@ targets:
         sourceRevisionDigest: sha256:8b97a1d60218c2ac430425608e06a91c1ae2f4434b58b626754dd26fe8a359ef
         sourceBlobDigest: sha256:82e5a15a56b740c7b4105f65916357e5c0d7f33d01430b0d5c5561b4b342832e
         codeSamplesNamespace: main-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:79029caf79e70982476a6581f2cb76be64bffa65b6f1625ed46ab68f250e8e6a
+        codeSamplesRevisionDigest: sha256:d2bd8a9d95ef5bb4addb4b7c5a15a9d69415a908e6fc803351783ba009181642
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -36,6 +29,9 @@ workflow:
         gizmo:
             target: typescript
             source: main
+            publish:
+                npm:
+                    token: $npm_token
             codeSamples:
                 registry:
                     location: registry.speakeasyapi.dev/gizmo-2xw/prod/main-typescript-code-samples

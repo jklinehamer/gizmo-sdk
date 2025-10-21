@@ -29,7 +29,7 @@ const gizmo = new GizmoCore({
 });
 
 async function run() {
-  const res = await applicationGetApplication(gizmo, "423");
+  const res = await applicationGetApplication(gizmo, "<id>");
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
