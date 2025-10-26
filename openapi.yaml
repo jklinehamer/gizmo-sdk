@@ -152,6 +152,7 @@ components:
           properties:
             "message":
               type: "string"
+            "data": {}
           required:
             - "message"
       required:
@@ -201,6 +202,24 @@ paths:
           content:
             "application/json":
               schema: {"$ref": "#/components/schemas/ErrorResponse"}
+        "429":
+          description: "Rate limit exceeded"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "kind":
+                    type: "string"
+                    const: "RateLimited"
+                  "name":
+                    type: "string"
+                  "retryAfter":
+                    type: "number"
+                required:
+                  - "kind"
+                  - "name"
+                  - "retryAfter"
       summary: "Update Application"
       tags:
         - "Application"
@@ -266,6 +285,24 @@ paths:
           content:
             "application/json":
               schema: {"$ref": "#/components/schemas/ErrorResponse"}
+        "429":
+          description: "Rate limit exceeded"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "kind":
+                    type: "string"
+                    const: "RateLimited"
+                  "name":
+                    type: "string"
+                  "retryAfter":
+                    type: "number"
+                required:
+                  - "kind"
+                  - "name"
+                  - "retryAfter"
       summary: "Create Application"
       tags:
         - "Application"
