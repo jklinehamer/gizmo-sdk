@@ -295,7 +295,7 @@ run();
 * [`GizmoError`](./src/models/errors/gizmoerror.ts): The base class for HTTP error responses.
   * [`ErrorResponse`](./src/models/errors/errorresponse.ts): Error response object. Status code `400`.
 
-<details><summary>Less common errors (6)</summary>
+<details><summary>Less common errors (8)</summary>
 
 <br />
 
@@ -308,9 +308,13 @@ run();
 
 
 **Inherit from [`GizmoError`](./src/models/errors/gizmoerror.ts)**:
+* [`UpdateApplicationRateLimitedError`](./src/models/errors/updateapplicationratelimitederror.ts): Rate limit exceeded. Status code `429`. Applicable to 1 of 3 methods.*
+* [`CreateApplicationRateLimitedError`](./src/models/errors/createapplicationratelimitederror.ts): Rate limit exceeded. Status code `429`. Applicable to 1 of 3 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
+
+\* Check [the method documentation](#available-resources-and-operations) to see if the error is applicable.
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->
