@@ -26,3 +26,4 @@ let value: UpdateApplicationRequestBody = {};
 | `subjectPropertyState`                            | [models.State](../../models/state.md)             | :heavy_minus_sign:                                | The two-letter state abbreviation in lowercase    |
 | `subjectPropertyStreetAddress`                    | *string*                                          | :heavy_minus_sign:                                | N/A                                               |
 | `subjectPropertyZip`                              | *string*                                          | :heavy_minus_sign:                                | N/A                                               |
+| `teamId`                                          | *string*                                          | :heavy_minus_sign:                                | N/A                                               |
