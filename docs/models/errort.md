@@ -15,3 +15,4 @@ let value: ErrorT = {
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `message`          | *string*           | :heavy_check_mark: | N/A                |
+| `data`             | *any*              | :heavy_minus_sign: | N/A                |

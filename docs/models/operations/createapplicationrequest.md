@@ -33,3 +33,4 @@ let value: CreateApplicationRequest = {
 | `losId`                                           | *string*                                          | :heavy_minus_sign:                                | N/A                                               |
 | `crmId`                                           | *string*                                          | :heavy_minus_sign:                                | N/A                                               |
 | `leadProviderSlug`                                | *string*                                          | :heavy_check_mark:                                | N/A                                               |
+| `teamId`                                          | *string*                                          | :heavy_minus_sign:                                | N/A                                               |

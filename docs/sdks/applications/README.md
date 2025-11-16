@@ -145,10 +145,11 @@ run();
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| errors.ErrorResponse     | 400                      | application/json         |
-| errors.GizmoDefaultError | 4XX, 5XX                 | \*/\*                    |
+| Error Type                               | Status Code                              | Content Type                             |
+| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| errors.ErrorResponse                     | 400                                      | application/json                         |
+| errors.UpdateApplicationRateLimitedError | 429                                      | application/json                         |
+| errors.GizmoDefaultError                 | 4XX, 5XX                                 | \*/\*                                    |
 
 ## create
 
@@ -215,7 +216,8 @@ run();
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| errors.ErrorResponse     | 400                      | application/json         |
-| errors.GizmoDefaultError | 4XX, 5XX                 | \*/\*                    |
+| Error Type                               | Status Code                              | Content Type                             |
+| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| errors.ErrorResponse                     | 400                                      | application/json                         |
+| errors.CreateApplicationRateLimitedError | 429                                      | application/json                         |
+| errors.GizmoDefaultError                 | 4XX, 5XX                                 | \*/\*                                    |
