@@ -27,6 +27,7 @@ export type UpdateApplicationRequestBody = {
   subjectPropertyState?: models.State | undefined;
   subjectPropertyStreetAddress?: string | undefined;
   subjectPropertyZip?: string | undefined;
+  teamId?: string | undefined;
 };
 
 export type UpdateApplicationRequest = {
@@ -54,6 +55,7 @@ export const UpdateApplicationRequestBody$inboundSchema: z.ZodType<
   subjectPropertyState: models.State$inboundSchema.optional(),
   subjectPropertyStreetAddress: z.string().optional(),
   subjectPropertyZip: z.string().optional(),
+  teamId: z.string().optional(),
 });
 
 /** @internal */
@@ -72,6 +74,7 @@ export type UpdateApplicationRequestBody$Outbound = {
   subjectPropertyState?: string | undefined;
   subjectPropertyStreetAddress?: string | undefined;
   subjectPropertyZip?: string | undefined;
+  teamId?: string | undefined;
 };
 
 /** @internal */
@@ -94,6 +97,7 @@ export const UpdateApplicationRequestBody$outboundSchema: z.ZodType<
   subjectPropertyState: models.State$outboundSchema.optional(),
   subjectPropertyStreetAddress: z.string().optional(),
   subjectPropertyZip: z.string().optional(),
+  teamId: z.string().optional(),
 });
 
 /**

@@ -44,6 +44,7 @@ export type Application = {
   losId?: string | undefined;
   crmId?: string | undefined;
   leadProviderSlug: string;
+  teamId?: string | undefined;
 };
 
 /** @internal */
@@ -71,6 +72,7 @@ export const Application$inboundSchema: z.ZodType<
   losId: z.string().optional(),
   crmId: z.string().optional(),
   leadProviderSlug: z.string(),
+  teamId: z.string().optional(),
 });
 
 /** @internal */
@@ -94,6 +96,7 @@ export type Application$Outbound = {
   losId?: string | undefined;
   crmId?: string | undefined;
   leadProviderSlug: string;
+  teamId?: string | undefined;
 };
 
 /** @internal */
@@ -121,6 +124,7 @@ export const Application$outboundSchema: z.ZodType<
   losId: z.string().optional(),
   crmId: z.string().optional(),
   leadProviderSlug: z.string(),
+  teamId: z.string().optional(),
 });
 
 /**

@@ -36,6 +36,7 @@ export function applicationsCreate(
   Result<
     operations.CreateApplicationResponse,
     | errors.ErrorResponse
+    | errors.CreateApplicationRateLimitedError
     | GizmoError
     | ResponseValidationError
     | ConnectionError
@@ -62,6 +63,7 @@ async function $do(
     Result<
       operations.CreateApplicationResponse,
       | errors.ErrorResponse
+      | errors.CreateApplicationRateLimitedError
       | GizmoError
       | ResponseValidationError
       | ConnectionError
@@ -133,7 +135,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["400", "4XX", "5XX"],
+    errorCodes: ["400", "429", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -149,6 +151,7 @@ async function $do(
   const [result] = await M.match<
     operations.CreateApplicationResponse,
     | errors.ErrorResponse
+    | errors.CreateApplicationRateLimitedError
     | GizmoError
     | ResponseValidationError
     | ConnectionError
@@ -160,6 +163,7 @@ async function $do(
   >(
     M.json(200, operations.CreateApplicationResponse$inboundSchema),
     M.jsonErr(400, errors.ErrorResponse$inboundSchema),
+    M.jsonErr(429, errors.CreateApplicationRateLimitedError$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

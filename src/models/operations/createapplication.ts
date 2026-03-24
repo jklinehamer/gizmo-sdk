@@ -26,6 +26,7 @@ export type CreateApplicationRequest = {
   losId?: string | undefined;
   crmId?: string | undefined;
   leadProviderSlug: string;
+  teamId?: string | undefined;
 };
 
 /**
@@ -55,6 +56,7 @@ export const CreateApplicationRequest$inboundSchema: z.ZodType<
   losId: z.string().optional(),
   crmId: z.string().optional(),
   leadProviderSlug: z.string(),
+  teamId: z.string().optional(),
 });
 
 /** @internal */
@@ -73,6 +75,7 @@ export type CreateApplicationRequest$Outbound = {
   losId?: string | undefined;
   crmId?: string | undefined;
   leadProviderSlug: string;
+  teamId?: string | undefined;
 };
 
 /** @internal */
@@ -95,6 +98,7 @@ export const CreateApplicationRequest$outboundSchema: z.ZodType<
   losId: z.string().optional(),
   crmId: z.string().optional(),
   leadProviderSlug: z.string(),
+  teamId: z.string().optional(),
 });
 
 /**

@@ -9,17 +9,20 @@ import { SDKValidationError } from "./errors/sdkvalidationerror.js";
 
 export type ErrorT = {
   message: string;
+  data?: any | undefined;
 };
 
 /** @internal */
 export const ErrorT$inboundSchema: z.ZodType<ErrorT, z.ZodTypeDef, unknown> = z
   .object({
     message: z.string(),
+    data: z.any().optional(),
   });
 
 /** @internal */
 export type ErrorT$Outbound = {
   message: string;
+  data?: any | undefined;
 };
 
 /** @internal */
@@ -29,6 +32,7 @@ export const ErrorT$outboundSchema: z.ZodType<
   ErrorT
 > = z.object({
   message: z.string(),
+  data: z.any().optional(),
 });
 
 /**
